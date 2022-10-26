@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5347EEB62907E155007A8AA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEB52907E155007A8AA1 /* AppDelegate.swift */; };
 		5347EEB82907E155007A8AA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEB72907E155007A8AA1 /* SceneDelegate.swift */; };
-		5347EEBA2907E155007A8AA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEB92907E155007A8AA1 /* ViewController.swift */; };
+		5347EEBA2907E155007A8AA1 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEB92907E155007A8AA1 /* RegistrationViewController.swift */; };
 		5347EEBD2907E155007A8AA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5347EEBB2907E155007A8AA1 /* Main.storyboard */; };
 		5347EEC02907E155007A8AA1 /* AlefTestProblem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEBE2907E155007A8AA1 /* AlefTestProblem.xcdatamodeld */; };
 		5347EEC22907E15E007A8AA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5347EEC12907E15E007A8AA1 /* Assets.xcassets */; };
@@ -34,6 +34,9 @@
 		534BC1C3290950EA00F22B43 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534BC1BF290950EA00F22B43 /* TextFieldTableViewCell.xib */; };
 		534BC1C4290950EA00F22B43 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534BC1BF290950EA00F22B43 /* TextFieldTableViewCell.xib */; };
 		534BC1C5290950EA00F22B43 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534BC1BF290950EA00F22B43 /* TextFieldTableViewCell.xib */; };
+		534BC1D12909616700F22B43 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534BC1D02909616700F22B43 /* RegistrationViewModel.swift */; };
+		534BC1D22909616700F22B43 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534BC1D02909616700F22B43 /* RegistrationViewModel.swift */; };
+		534BC1D32909616700F22B43 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534BC1D02909616700F22B43 /* RegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +60,7 @@
 		5347EEB22907E155007A8AA1 /* AlefTestProblem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlefTestProblem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5347EEB52907E155007A8AA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5347EEB72907E155007A8AA1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5347EEB92907E155007A8AA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5347EEB92907E155007A8AA1 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		5347EEBC2907E155007A8AA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5347EEBF2907E155007A8AA1 /* AlefTestProblem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AlefTestProblem.xcdatamodel; sourceTree = "<group>"; };
 		5347EEC12907E15E007A8AA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 		534BC1B7290949D000F22B43 /* RegisterTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterTableView.xib; sourceTree = "<group>"; };
 		534BC1BE290950EA00F22B43 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		534BC1BF290950EA00F22B43 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		534BC1D02909616700F22B43 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,16 +129,8 @@
 		5347EEB42907E155007A8AA1 /* AlefTestProblem */ = {
 			isa = PBXGroup;
 			children = (
-				5347EF56290948F7007A8AA1 /* RigisterTableView */,
-				5347EF4129093EFA007A8AA1 /* RegisterTableViewCell */,
-				5347EEB52907E155007A8AA1 /* AppDelegate.swift */,
-				5347EEB72907E155007A8AA1 /* SceneDelegate.swift */,
-				5347EEB92907E155007A8AA1 /* ViewController.swift */,
-				5347EEBB2907E155007A8AA1 /* Main.storyboard */,
-				5347EEC12907E15E007A8AA1 /* Assets.xcassets */,
-				5347EEC32907E15E007A8AA1 /* LaunchScreen.storyboard */,
-				5347EEC62907E15E007A8AA1 /* Info.plist */,
-				5347EEBE2907E155007A8AA1 /* AlefTestProblem.xcdatamodeld */,
+				534BC1DE290961CC00F22B43 /* Resources */,
+				534BC1D72909618800F22B43 /* Code */,
 			);
 			path = AlefTestProblem;
 			sourceTree = "<group>";
@@ -160,21 +156,86 @@
 		5347EF4129093EFA007A8AA1 /* RegisterTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				5347EF4229093F20007A8AA1 /* LabelTableViewCell.swift */,
-				5347EF4329093F20007A8AA1 /* LabelTableViewCell.xib */,
-				534BC1BE290950EA00F22B43 /* TextFieldTableViewCell.swift */,
-				534BC1BF290950EA00F22B43 /* TextFieldTableViewCell.xib */,
+				534BC1CF2909605A00F22B43 /* TextFieldTableViewCell */,
+				534BC1CE2909605200F22B43 /* LabelTableViewCell */,
 			);
 			path = RegisterTableViewCell;
 			sourceTree = "<group>";
 		};
-		5347EF56290948F7007A8AA1 /* RigisterTableView */ = {
+		534BC1C929095FF200F22B43 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		534BC1CA29095FFA00F22B43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5347EEC32907E15E007A8AA1 /* LaunchScreen.storyboard */,
+				5347EEBB2907E155007A8AA1 /* Main.storyboard */,
+				5347EEB92907E155007A8AA1 /* RegistrationViewController.swift */,
+				534BC1CC2909602500F22B43 /* RegisterTableView */,
+				5347EF4129093EFA007A8AA1 /* RegisterTableViewCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		534BC1CB29095FFE00F22B43 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				534BC1D02909616700F22B43 /* RegistrationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		534BC1CC2909602500F22B43 /* RegisterTableView */ = {
 			isa = PBXGroup;
 			children = (
 				534BC1B0290949B200F22B43 /* RegisterTableView.swift */,
 				534BC1B7290949D000F22B43 /* RegisterTableView.xib */,
 			);
-			path = RigisterTableView;
+			path = RegisterTableView;
+			sourceTree = "<group>";
+		};
+		534BC1CE2909605200F22B43 /* LabelTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5347EF4229093F20007A8AA1 /* LabelTableViewCell.swift */,
+				5347EF4329093F20007A8AA1 /* LabelTableViewCell.xib */,
+			);
+			path = LabelTableViewCell;
+			sourceTree = "<group>";
+		};
+		534BC1CF2909605A00F22B43 /* TextFieldTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				534BC1BE290950EA00F22B43 /* TextFieldTableViewCell.swift */,
+				534BC1BF290950EA00F22B43 /* TextFieldTableViewCell.xib */,
+			);
+			path = TextFieldTableViewCell;
+			sourceTree = "<group>";
+		};
+		534BC1D72909618800F22B43 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				5347EEB72907E155007A8AA1 /* SceneDelegate.swift */,
+				5347EEB52907E155007A8AA1 /* AppDelegate.swift */,
+				534BC1CB29095FFE00F22B43 /* ViewModel */,
+				534BC1CA29095FFA00F22B43 /* View */,
+				534BC1C929095FF200F22B43 /* Model */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		534BC1DE290961CC00F22B43 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5347EEC12907E15E007A8AA1 /* Assets.xcassets */,
+				5347EEBE2907E155007A8AA1 /* AlefTestProblem.xcdatamodeld */,
+				5347EEC62907E15E007A8AA1 /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,10 +378,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				534BC1B1290949B200F22B43 /* RegisterTableView.swift in Sources */,
-				5347EEBA2907E155007A8AA1 /* ViewController.swift in Sources */,
+				5347EEBA2907E155007A8AA1 /* RegistrationViewController.swift in Sources */,
 				534BC1C0290950EA00F22B43 /* TextFieldTableViewCell.swift in Sources */,
 				5347EEC02907E155007A8AA1 /* AlefTestProblem.xcdatamodeld in Sources */,
 				5347EF4429093F20007A8AA1 /* LabelTableViewCell.swift in Sources */,
+				534BC1D12909616700F22B43 /* RegistrationViewModel.swift in Sources */,
 				5347EEB62907E155007A8AA1 /* AppDelegate.swift in Sources */,
 				5347EEB82907E155007A8AA1 /* SceneDelegate.swift in Sources */,
 			);
@@ -330,6 +392,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534BC1D22909616700F22B43 /* RegistrationViewModel.swift in Sources */,
 				534BC1B2290949B200F22B43 /* RegisterTableView.swift in Sources */,
 				5347EED02907E15F007A8AA1 /* AlefTestProblemTests.swift in Sources */,
 				5347EF4529093F20007A8AA1 /* LabelTableViewCell.swift in Sources */,
@@ -341,6 +404,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534BC1D32909616700F22B43 /* RegistrationViewModel.swift in Sources */,
 				534BC1B3290949B200F22B43 /* RegisterTableView.swift in Sources */,
 				5347EEDB2907E15F007A8AA1 /* AlefTestProblemUITests.swift in Sources */,
 				5347EF4629093F20007A8AA1 /* LabelTableViewCell.swift in Sources */,
@@ -506,7 +570,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HKZ6SL8ND7;
-				INFOPLIST_FILE = AlefTestProblem/Info.plist;
+				INFOPLIST_FILE = AlefTestProblem/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -525,7 +589,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HKZ6SL8ND7;
-				INFOPLIST_FILE = AlefTestProblem/Info.plist;
+				INFOPLIST_FILE = AlefTestProblem/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

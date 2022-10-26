@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RegistrationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let tableView = RegisterTableView()
 
