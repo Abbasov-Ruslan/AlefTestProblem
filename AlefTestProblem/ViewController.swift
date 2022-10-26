@@ -9,14 +9,17 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    let tableView = UITableView()
+    let tableView = RegisterTableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
+        tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
         tableView.dataSource = self
         tableView.delegate = self
+
+        tableView.separatorColor = UIColor.clear
     }
 
 
@@ -33,19 +36,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 5
     }
 
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        cell.textLabel?.text = "Hello world \(indexPath.row + 1)"
-//        cell.imageView?.image = UIImage(systemName: "house")
-//        cell.imageView?.tintColor = .systemBlue
-//        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-//        return cell
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        self.tableView.estimatedRowHeight = 52
+        return UITableView.automaticDimension
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelTableViewCell", for: indexPath) as! LabelTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TextFieldTableViewCell", for: indexPath) as! TextFieldTableViewCell
 
-        cell.label.text = "Персональные данные"
+//        cell.label.text = "Персональные данные"
 
         return cell
     }
