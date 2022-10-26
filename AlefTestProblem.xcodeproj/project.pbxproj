@@ -16,18 +16,12 @@
 		5347EEC52907E15E007A8AA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5347EEC32907E15E007A8AA1 /* LaunchScreen.storyboard */; };
 		5347EED02907E15F007A8AA1 /* AlefTestProblemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EECF2907E15F007A8AA1 /* AlefTestProblemTests.swift */; };
 		5347EEDB2907E15F007A8AA1 /* AlefTestProblemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEDA2907E15F007A8AA1 /* AlefTestProblemUITests.swift */; };
-		5347EF0529092546007A8AA1 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF0329092546007A8AA1 /* TableViewCell.swift */; };
-		5347EF0629092546007A8AA1 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF0329092546007A8AA1 /* TableViewCell.swift */; };
-		5347EF0729092546007A8AA1 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF0329092546007A8AA1 /* TableViewCell.swift */; };
-		5347EF0829092546007A8AA1 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF0429092546007A8AA1 /* TableViewCell.xib */; };
-		5347EF0929092546007A8AA1 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF0429092546007A8AA1 /* TableViewCell.xib */; };
-		5347EF0A29092546007A8AA1 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF0429092546007A8AA1 /* TableViewCell.xib */; };
-		5347EF102909256C007A8AA1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF0E2909256C007A8AA1 /* TableViewController.swift */; };
-		5347EF112909256C007A8AA1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF0E2909256C007A8AA1 /* TableViewController.swift */; };
-		5347EF122909256C007A8AA1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF0E2909256C007A8AA1 /* TableViewController.swift */; };
-		5347EF132909256C007A8AA1 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF0F2909256C007A8AA1 /* TableViewController.xib */; };
-		5347EF142909256C007A8AA1 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF0F2909256C007A8AA1 /* TableViewController.xib */; };
-		5347EF152909256C007A8AA1 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF0F2909256C007A8AA1 /* TableViewController.xib */; };
+		5347EF4429093F20007A8AA1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF4229093F20007A8AA1 /* LabelTableViewCell.swift */; };
+		5347EF4529093F20007A8AA1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF4229093F20007A8AA1 /* LabelTableViewCell.swift */; };
+		5347EF4629093F20007A8AA1 /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EF4229093F20007A8AA1 /* LabelTableViewCell.swift */; };
+		5347EF4729093F20007A8AA1 /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF4329093F20007A8AA1 /* LabelTableViewCell.xib */; };
+		5347EF4829093F20007A8AA1 /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF4329093F20007A8AA1 /* LabelTableViewCell.xib */; };
+		5347EF4929093F20007A8AA1 /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5347EF4329093F20007A8AA1 /* LabelTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,10 +57,8 @@
 		5347EED62907E15F007A8AA1 /* AlefTestProblemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlefTestProblemUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5347EEDA2907E15F007A8AA1 /* AlefTestProblemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlefTestProblemUITests.swift; sourceTree = "<group>"; };
 		5347EEDC2907E15F007A8AA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5347EF0329092546007A8AA1 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		5347EF0429092546007A8AA1 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
-		5347EF0E2909256C007A8AA1 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		5347EF0F2909256C007A8AA1 /* TableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewController.xib; sourceTree = "<group>"; };
+		5347EF4229093F20007A8AA1 /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		5347EF4329093F20007A8AA1 /* LabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +109,7 @@
 		5347EEB42907E155007A8AA1 /* AlefTestProblem */ = {
 			isa = PBXGroup;
 			children = (
+				5347EF4129093EFA007A8AA1 /* TableViewCell */,
 				5347EEB52907E155007A8AA1 /* AppDelegate.swift */,
 				5347EEB72907E155007A8AA1 /* SceneDelegate.swift */,
 				5347EEB92907E155007A8AA1 /* ViewController.swift */,
@@ -125,10 +118,6 @@
 				5347EEC32907E15E007A8AA1 /* LaunchScreen.storyboard */,
 				5347EEC62907E15E007A8AA1 /* Info.plist */,
 				5347EEBE2907E155007A8AA1 /* AlefTestProblem.xcdatamodeld */,
-				5347EF0329092546007A8AA1 /* TableViewCell.swift */,
-				5347EF0429092546007A8AA1 /* TableViewCell.xib */,
-				5347EF0E2909256C007A8AA1 /* TableViewController.swift */,
-				5347EF0F2909256C007A8AA1 /* TableViewController.xib */,
 			);
 			path = AlefTestProblem;
 			sourceTree = "<group>";
@@ -149,6 +138,15 @@
 				5347EEDC2907E15F007A8AA1 /* Info.plist */,
 			);
 			path = AlefTestProblemUITests;
+			sourceTree = "<group>";
+		};
+		5347EF4129093EFA007A8AA1 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5347EF4229093F20007A8AA1 /* LabelTableViewCell.swift */,
+				5347EF4329093F20007A8AA1 /* LabelTableViewCell.xib */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,10 +252,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5347EF4729093F20007A8AA1 /* LabelTableViewCell.xib in Resources */,
 				5347EEC52907E15E007A8AA1 /* LaunchScreen.storyboard in Resources */,
-				5347EF0829092546007A8AA1 /* TableViewCell.xib in Resources */,
 				5347EEC22907E15E007A8AA1 /* Assets.xcassets in Resources */,
-				5347EF132909256C007A8AA1 /* TableViewController.xib in Resources */,
 				5347EEBD2907E155007A8AA1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,8 +263,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5347EF0929092546007A8AA1 /* TableViewCell.xib in Resources */,
-				5347EF142909256C007A8AA1 /* TableViewController.xib in Resources */,
+				5347EF4829093F20007A8AA1 /* LabelTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,8 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5347EF0A29092546007A8AA1 /* TableViewCell.xib in Resources */,
-				5347EF152909256C007A8AA1 /* TableViewController.xib in Resources */,
+				5347EF4929093F20007A8AA1 /* LabelTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,10 +282,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5347EF0529092546007A8AA1 /* TableViewCell.swift in Sources */,
-				5347EF102909256C007A8AA1 /* TableViewController.swift in Sources */,
 				5347EEBA2907E155007A8AA1 /* ViewController.swift in Sources */,
 				5347EEC02907E155007A8AA1 /* AlefTestProblem.xcdatamodeld in Sources */,
+				5347EF4429093F20007A8AA1 /* LabelTableViewCell.swift in Sources */,
 				5347EEB62907E155007A8AA1 /* AppDelegate.swift in Sources */,
 				5347EEB82907E155007A8AA1 /* SceneDelegate.swift in Sources */,
 			);
@@ -301,8 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5347EED02907E15F007A8AA1 /* AlefTestProblemTests.swift in Sources */,
-				5347EF112909256C007A8AA1 /* TableViewController.swift in Sources */,
-				5347EF0629092546007A8AA1 /* TableViewCell.swift in Sources */,
+				5347EF4529093F20007A8AA1 /* LabelTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,8 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5347EEDB2907E15F007A8AA1 /* AlefTestProblemUITests.swift in Sources */,
-				5347EF122909256C007A8AA1 /* TableViewController.swift in Sources */,
-				5347EF0729092546007A8AA1 /* TableViewCell.swift in Sources */,
+				5347EF4629093F20007A8AA1 /* LabelTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

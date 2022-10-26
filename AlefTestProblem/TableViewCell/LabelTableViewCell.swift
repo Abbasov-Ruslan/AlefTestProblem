@@ -1,5 +1,5 @@
 //
-//  TableViewCell.swift
+//  LabelTableViewCell.swift
 //  AlefTestProblem
 //
 //  Created by Ruslan Abbasov on 26.10.2022.
@@ -7,7 +7,9 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class LabelTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var label: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
