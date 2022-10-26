@@ -129,8 +129,8 @@
 		5347EEB42907E155007A8AA1 /* AlefTestProblem */ = {
 			isa = PBXGroup;
 			children = (
-				534BC1DE290961CC00F22B43 /* Resources */,
 				534BC1D72909618800F22B43 /* Code */,
+				534BC1DE290961CC00F22B43 /* Resources */,
 			);
 			path = AlefTestProblem;
 			sourceTree = "<group>";
@@ -219,8 +219,7 @@
 		534BC1D72909618800F22B43 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				5347EEB72907E155007A8AA1 /* SceneDelegate.swift */,
-				5347EEB52907E155007A8AA1 /* AppDelegate.swift */,
+				534BC1EE2909684000F22B43 /* App */,
 				534BC1CB29095FFE00F22B43 /* ViewModel */,
 				534BC1CA29095FFA00F22B43 /* View */,
 				534BC1C929095FF200F22B43 /* Model */,
@@ -236,6 +235,15 @@
 				5347EEC62907E15E007A8AA1 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		534BC1EE2909684000F22B43 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5347EEB72907E155007A8AA1 /* SceneDelegate.swift */,
+				5347EEB52907E155007A8AA1 /* AppDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
