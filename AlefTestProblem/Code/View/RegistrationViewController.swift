@@ -17,12 +17,11 @@ class RegistrationViewController: UIViewController, UITableViewDelegate, UITable
         view.addSubview(tableView)
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
         tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
-        tableView.dataSource = self
+
+        tableView.dataSource = dataSource
         tableView.delegate = self
 
         tableView.separatorColor = UIColor.clear
-
-        tableView.dataSource = dataSource
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AppleCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "OrangeCell")
@@ -67,14 +66,10 @@ enum Section: String, CaseIterable, Hashable {
 extension RegistrationViewController {
     /// Update the table with some "real" data (1 apple and 1 orange for now)
     private func getData() {
-        DispatchQueue.global().async {
 
-            let labelCell = [LabelCell(labelText: "Персональные данные")]
-            DispatchQueue.main.async {
-                //Have data
-                self.updateTable(cells: labelCell)
-            }
-        }
+        let labelCell = [LabelCell(labelText: "Персональные данные")]
+        //Have data
+        self.updateTable(cells: labelCell)
     }
 
     /// Update the data source snapshot
@@ -86,7 +81,7 @@ extension RegistrationViewController {
         // the existing snapshot and update it.
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         defer {
-            dataSource.apply(snapshot)
+            dataSource.apply(snapshot, animatingDifferences: tableView.window != nil)
         }
 
         // We have either apples or oranges, so update the snapshot with those
