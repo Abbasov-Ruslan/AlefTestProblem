@@ -162,13 +162,6 @@
 			path = RegisterTableViewCell;
 			sourceTree = "<group>";
 		};
-		534BC1C929095FF200F22B43 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		534BC1CA29095FFA00F22B43 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,7 +215,6 @@
 				534BC1EE2909684000F22B43 /* App */,
 				534BC1CB29095FFE00F22B43 /* ViewModel */,
 				534BC1CA29095FFA00F22B43 /* View */,
-				534BC1C929095FF200F22B43 /* Model */,
 			);
 			path = Code;
 			sourceTree = "<group>";
