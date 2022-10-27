@@ -68,13 +68,11 @@ extension RegistrationViewController {
     /// Update the table with some "real" data (1 apple and 1 orange for now)
     private func getData() {
         DispatchQueue.global().async {
-            //Pretend we're getting some data asynchronously
-            let apples = [Apple(name: "Granny Smith", coreThickness: 12)]
-            let oranges = [Orange(name: "Navel", peelThickness: 3)]
+
             let labelCell = [LabelCell(labelText: "Персональные данные")]
             DispatchQueue.main.async {
                 //Have data
-                self.updateTable(apples: apples, oranges: oranges, cells: labelCell)
+                self.updateTable(cells: labelCell)
             }
         }
     }
@@ -83,7 +81,7 @@ extension RegistrationViewController {
     /// - Parameters:
     ///   - apples: Apples if any
     ///   - oranges: Oranges if any
-    private func updateTable(apples: [Apple], oranges: [Orange], cells: [LabelCell]) {
+    private func updateTable(cells: [LabelCell]) {
         // Create a new snapshot on each load. Normally you might pull
         // the existing snapshot and update it.
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
@@ -93,8 +91,6 @@ extension RegistrationViewController {
 
         // We have either apples or oranges, so update the snapshot with those
         snapshot.appendSections([.emptySection])
-        snapshot.appendItems(apples, toSection: .emptySection)
-        snapshot.appendItems(oranges, toSection: .emptySection)
         snapshot.appendItems(cells, toSection: .emptySection)
     }
 
@@ -102,17 +98,7 @@ extension RegistrationViewController {
     /// - Returns: Diffable data source
     private func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
-            if let apple = item as? Apple {
-                //Apple
-                let cell = tableView.dequeueReusableCell(withIdentifier: "AppleCell", for: indexPath)
-                cell.textLabel?.text = "\(apple.name), core thickness: \(apple.coreThickness)mm"
-                return cell
-            } else if let orange = item as? Orange {
-                //Orange
-                let cell = tableView.dequeueReusableCell(withIdentifier: "OrangeCell", for: indexPath)
-                cell.textLabel?.text = "\(orange.name), peel thickness: \(orange.peelThickness)mm"
-                return cell
-            } else if let labelCell = item as? LabelCell {
+            if let labelCell = item as? LabelCell {
                 //LabelTableViewCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "LabelTableViewCell", for: indexPath) as? LabelTableViewCell
                 cell?.label.text = labelCell.labelText
@@ -121,18 +107,6 @@ extension RegistrationViewController {
                 fatalError("Unknown cell type")
             }
         }
-    }
-
-    /// One type of data
-    struct Apple: Hashable {
-        var name: String
-        var coreThickness: Int
-    }
-
-    /// Another type of data
-    struct Orange: Hashable {
-        var name: String
-        var peelThickness: Int
     }
 
     struct LabelCell: Hashable {
