@@ -26,7 +26,6 @@ class RegistrationViewController: UIViewController, UITableViewDelegate, UITable
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AppleCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "OrangeCell")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EmptyDataCell")
 
         getData()
     }
@@ -92,17 +91,8 @@ extension RegistrationViewController {
             dataSource.apply(snapshot)
         }
 
-        // If we have no data, just show the empty view
-        //        guard !apples.isEmpty || !oranges.isEmpty else {
-        //            snapshot.appendSections([.empty])
-        //            snapshot.appendItems([EmptyData()], toSection: .empty)
-        //            return
-        //        }
-
         // We have either apples or oranges, so update the snapshot with those
         snapshot.appendSections([.emptySection])
-        //        snapshot.appendItems(apples)
-        //        snapshot.appendItems(oranges)
         snapshot.appendItems(apples, toSection: .emptySection)
         snapshot.appendItems(oranges, toSection: .emptySection)
         snapshot.appendItems(cells, toSection: .emptySection)
@@ -121,11 +111,6 @@ extension RegistrationViewController {
                 //Orange
                 let cell = tableView.dequeueReusableCell(withIdentifier: "OrangeCell", for: indexPath)
                 cell.textLabel?.text = "\(orange.name), peel thickness: \(orange.peelThickness)mm"
-                return cell
-            } else if let emptyData = item as? EmptyData {
-                //Empty
-                let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyDataCell", for: indexPath)
-                cell.textLabel?.text = emptyData.emptyMessage
                 return cell
             } else if let labelCell = item as? LabelCell {
                 //LabelTableViewCell
@@ -146,13 +131,6 @@ extension RegistrationViewController {
             return snapshot().sectionIdentifiers[section].rawValue
         }
 
-    }
-
-
-    /// Data to show if we have nothing returned from whatever API we use
-    struct EmptyData: Hashable {
-        let emptyMessage = "We're sorry! The fruit stand is closed due to inclement weather!"
-        let emptyImage = "cloud.bold.rain.fill"
     }
 
     /// One type of data
