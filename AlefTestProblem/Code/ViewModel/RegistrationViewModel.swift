@@ -28,7 +28,6 @@ class RegistratioinViewModel {
     public func getData() {
 
         let labelCell = [LabelCell(labelText: "Персональные данные")]
-        //Have data
         self.updateTable(cells: labelCell)
     }
 
@@ -56,4 +55,9 @@ class RegistratioinViewModel {
     struct LabelCell: Hashable {
         var labelText: String
     }
+
+    struct TextfieldCell: Hashable {
+        var subtitileText: String
+    }
+
 }
