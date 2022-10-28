@@ -7,12 +7,14 @@
 
 import UIKit
 
-/// Subclass to help set up sections, etc.
 class DiffableViewDataSource: UITableViewDiffableDataSource<Section, AnyHashable> {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //Use the snapshot to evaluate the section title
         return snapshot().sectionIdentifiers[section].rawValue
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableView.estimatedRowHeight = 52
+        return UITableView.automaticDimension
+    }
 }
