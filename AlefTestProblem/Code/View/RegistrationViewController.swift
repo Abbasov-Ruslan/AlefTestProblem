@@ -23,18 +23,9 @@ class RegistrationViewController: UIViewController, UITableViewDelegate {
             fatalError("Tableview is not initialized")
         }
         view.addSubview(tableView)
-        tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
-        tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
 
-        tableView.dataSource = viewModel.dataSource
         tableView.delegate = self
 
-        tableView.separatorColor = UIColor.clear
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AppleCell")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "OrangeCell")
-
-        viewModel.getData()
     }
 
 
@@ -45,39 +36,3 @@ class RegistrationViewController: UIViewController, UITableViewDelegate {
 
 
 }
-
-//extension RegistrationViewController {
-//
-//    private func getData() {
-//
-//        let labelCell = [LabelCell(labelText: "Персональные данные")]
-//        //Have data
-//        self.updateTable(cells: labelCell)
-//    }
-//
-//    private func updateTable(cells: [LabelCell]) {
-//        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-//        defer {
-//            dataSource.apply(snapshot, animatingDifferences: tableView.window != nil)
-//        }
-//        snapshot.appendSections([.emptySection])
-//        snapshot.appendItems(cells, toSection: .emptySection)
-//    }
-//
-//    private func makeDataSource() -> DiffableViewDataSource {
-//        return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
-//            if let labelCell = item as? LabelCell {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "LabelTableViewCell", for: indexPath) as? LabelTableViewCell
-//                cell?.label.text = labelCell.labelText
-//                return cell
-//            } else {
-//                fatalError("Unknown cell type")
-//            }
-//        }
-//    }
-//
-//    struct LabelCell: Hashable {
-//        var labelText: String
-//    }
-//
-//}

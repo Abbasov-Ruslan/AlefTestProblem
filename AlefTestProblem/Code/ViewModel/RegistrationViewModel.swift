@@ -13,6 +13,16 @@ class RegistratioinViewModel {
     public var tableView: UITableView = RegisterTableView()
 
     init() {
+        tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
+        tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
+
+        tableView.dataSource = dataSource
+
+        tableView.separatorColor = UIColor.clear
+
+        getData()
+
+        
     }
 
     public func getData() {
