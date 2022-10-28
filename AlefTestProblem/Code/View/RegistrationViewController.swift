@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController, UITableViewDelegate {
+class RegistrationViewController: UIViewController {
 
     private var viewModel = RegistratioinViewModel()
     private var tableView: UITableView?
@@ -24,14 +24,13 @@ class RegistrationViewController: UIViewController, UITableViewDelegate {
         }
         view.addSubview(tableView)
 
-        tableView.delegate = self
-
     }
 
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView?.frame = view.bounds
+        tableView?.separatorColor = UIColor.clear
     }
 
 
