@@ -18,3 +18,7 @@ class DiffableViewDataSource: UITableViewDiffableDataSource<Section, AnyHashable
         return UITableView.automaticDimension
     }
 }
+
+enum Section: String, CaseIterable, Hashable {
+    case emptySection = ""
+}

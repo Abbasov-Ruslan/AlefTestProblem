@@ -20,5 +20,83 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "541841D5-AF52-44B7-B8FF-3AE9A5050F3E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlefTestProblem/Code/View/RegistrationViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "RegistrationViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "541841D5-AF52-44B7-B8FF-3AE9A5050F3E - 6c92dc45211f1bef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AlefTestProblem.RegistrationViewController.(tableView in _654474FD00CFFA306BC6AF428418174A).getter : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "AlefTestProblem"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanabbasov/Xcode%20projects/AlefTestProblem/AlefTestProblem/Code/View/RegistrationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "126">
+               </Location>
+               <Location
+                  uuid = "541841D5-AF52-44B7-B8FF-3AE9A5050F3E - 6c92dc45211f1bef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AlefTestProblem.RegistrationViewController.(tableView in _654474FD00CFFA306BC6AF428418174A).setter : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "AlefTestProblem"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanabbasov/Xcode%20projects/AlefTestProblem/AlefTestProblem/Code/View/RegistrationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "541841D5-AF52-44B7-B8FF-3AE9A5050F3E - 6c92dc45211f1a32"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AlefTestProblem.RegistrationViewController.(tableView in _654474FD00CFFA306BC6AF428418174A).modify : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "AlefTestProblem"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanabbasov/Xcode%20projects/AlefTestProblem/AlefTestProblem/Code/View/RegistrationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "541841D5-AF52-44B7-B8FF-3AE9A5050F3E - d297b0e5f97e7a4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AlefTestProblem.RegistrationViewController.(tableView in _654474FD00CFFA306BC6AF428418174A).modify : Swift.Optional&lt;__C.UITableView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "AlefTestProblem"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanabbasov/Xcode%20projects/AlefTestProblem/AlefTestProblem/Code/View/RegistrationViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
