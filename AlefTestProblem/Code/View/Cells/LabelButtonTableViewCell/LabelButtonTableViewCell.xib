@@ -12,7 +12,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LabelButtonTableViewCell" rowHeight="77" id="KGk-i7-Jjw" customClass="LabelButtonTableViewCell" customModule="AlefTestProblem" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="394" height="77"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="394" height="77"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -41,7 +41,7 @@
                     <constraint firstItem="Mcl-Qt-Yie" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Zb6-sJ-ZzC"/>
                     <constraint firstAttribute="trailing" secondItem="Mcl-Qt-Yie" secondAttribute="trailing" constant="24" id="bbW-uT-ygg"/>
                     <constraint firstItem="Mcl-Qt-Yie" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="cH7-lQ-pfe"/>
-                    <constraint firstAttribute="bottom" secondItem="Mcl-Qt-Yie" secondAttribute="bottom" constant="5" id="sS9-zB-2bu"/>
+                    <constraint firstAttribute="bottom" secondItem="Mcl-Qt-Yie" secondAttribute="bottom" priority="800" constant="5" id="sS9-zB-2bu"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
