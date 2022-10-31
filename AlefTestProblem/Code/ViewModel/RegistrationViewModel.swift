@@ -54,6 +54,12 @@ class RegistratioinViewModel {
 
     }
 
+    public func remove(_ cell: AnyHashable, animate: Bool = true) {
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems([cell])
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+
     public func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
             if let labelCell = item as? LabelCell {
