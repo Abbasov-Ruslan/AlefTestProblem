@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonTableViewCell" rowHeight="57" id="KGk-i7-Jjw" customClass="ButtonTableViewCell" customModule="AlefTestProblem" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf4-YE-Z0F">
+                        <rect key="frame" x="76" y="5" width="168" height="42"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="42" id="CNT-H0-wR2"/>
+                        </constraints>
+                        <state key="normal" title="Очистить">
+                            <color key="titleColor" systemColor="systemRedColor"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hf4-YE-Z0F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="76" id="Sne-mY-RTW"/>
+                    <constraint firstAttribute="bottom" secondItem="hf4-YE-Z0F" secondAttribute="bottom" priority="800" constant="5" id="WFD-n7-0rJ"/>
+                    <constraint firstAttribute="trailing" secondItem="hf4-YE-Z0F" secondAttribute="trailing" constant="76" id="cYX-d0-KQh"/>
+                    <constraint firstItem="hf4-YE-Z0F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="wRK-xN-TRa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="deleteAllButton" destination="hf4-YE-Z0F" id="oDM-YQ-Ize"/>
+            </connections>
+            <point key="canvasLocation" x="102.89855072463769" y="47.209821428571423"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

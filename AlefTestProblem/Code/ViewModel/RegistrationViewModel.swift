@@ -18,6 +18,7 @@ class RegistratioinViewModel {
         tableView.register(UINib(nibName: "LabelButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelButtonTableViewCell")
         tableView.register(UINib(nibName: "TextFieldButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldButtonTableViewCell")
         tableView.register(UINib(nibName: "SeparatorTableViewCell", bundle: nil), forCellReuseIdentifier: "SeparatorTableViewCell")
+        tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "ButtonTableViewCell")
 
         tableView.dataSource = dataSource
 
@@ -36,7 +37,9 @@ class RegistratioinViewModel {
                                     LabelButtonCell(),
                                     TextfieldButtonCell(subtitileText: "Имя"),
                                     TextfieldButtonCell(subtitileText: "Возраст"),
-                                    SeparatorCell()]
+                                    SeparatorCell(),
+                                    ButtonCell()
+                                    ]
 
         self.updateTable(cells: cells)
     }
@@ -83,6 +86,12 @@ class RegistratioinViewModel {
                     for: indexPath) as? SeparatorTableViewCell
 
                 return cell
+            } else if let buttonCell = item as? ButtonCell {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: "ButtonTableViewCell",
+                    for: indexPath) as? ButtonTableViewCell
+
+                return cell
             } else {
                 fatalError("Unknown cell type")
             }
@@ -105,5 +114,8 @@ class RegistratioinViewModel {
     }
 
     struct SeparatorCell: Hashable {
+    }
+
+    struct ButtonCell: Hashable {
     }
 }
