@@ -22,11 +22,7 @@ class RegistratioinViewModel {
 
         tableView.dataSource = dataSource
 
-        
-
         getData()
-
-        
     }
 
     public func getData() {
@@ -76,7 +72,7 @@ class RegistratioinViewModel {
                 
                 cell?.subtitleLabel.text = textfieldCell.subtitileText
                 return cell
-            } else if let labelButtonCell = item as? LabelButtonCell {
+            } else if item is LabelButtonCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "LabelButtonTableViewCell",
                     for: indexPath) as? LabelButtonTableViewCell
@@ -87,13 +83,13 @@ class RegistratioinViewModel {
                     for: indexPath) as? TextFieldButtonTableViewCell
                 cell?.textfieldNameLabel.text = textfieldButtonCell.subtitileText
                 return cell
-            } else if let textfieldButtonCell = item as? SeparatorCell {
+            } else if item is SeparatorCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "SeparatorTableViewCell",
                     for: indexPath) as? SeparatorTableViewCell
 
                 return cell
-            } else if let buttonCell = item as? ButtonCell {
+            } else if item is ButtonCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "ButtonTableViewCell",
                     for: indexPath) as? ButtonTableViewCell
