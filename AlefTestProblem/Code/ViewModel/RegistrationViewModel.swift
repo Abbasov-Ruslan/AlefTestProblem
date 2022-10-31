@@ -27,7 +27,7 @@ class RegistratioinViewModel {
 
     public func getData() {
 
-        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"), TextfieldCell(subtitileText: "Имя")]
+        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"), TextfieldCell(subtitileText: "Имя"), TextfieldCell(subtitileText: "Возраст ")]
         self.updateTable(cells: cells)
     }
 
@@ -53,8 +53,8 @@ class RegistratioinViewModel {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldTableViewCell",
                     for: indexPath) as? TextFieldTableViewCell
-
-//                cell?.subtitleLabel.text = labelCell.subtitileText
+                
+                cell?.subtitleLabel.text = labelCell.subtitileText
                 return cell
             } else {
                 fatalError("Unknown cell type")
