@@ -31,13 +31,21 @@ class RegistratioinViewModel {
                                     TextfieldCell(subtitileText: "Имя"),
                                     TextfieldCell(subtitileText: "Возраст"),
                                     LabelButtonCell(),
-                                    TextfieldButtonCell(subtitileText: "Имя"),
-                                    TextfieldButtonCell(subtitileText: "Возраст"),
-                                    SeparatorCell(),
-                                    ButtonCell()
-                                    ]
-
+                                    ButtonCell()]
         self.updateTable(cells: cells)
+    }
+
+    public func AddChildCells() {
+        let childCells: [AnyHashable]  = [
+            TextfieldButtonCell(subtitileText: "Имя"),
+            TextfieldButtonCell(subtitileText: "Возраст"),
+            SeparatorCell()]
+
+        remove(ButtonCell(), animate: false)
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems(childCells, toSection: .mainSection)
+        snapshot.appendItems([ButtonCell()], toSection: .mainSection)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 
     public func updateTable(cells: [AnyHashable]) {
