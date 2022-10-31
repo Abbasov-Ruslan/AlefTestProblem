@@ -17,6 +17,7 @@ class RegistratioinViewModel {
         tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
         tableView.register(UINib(nibName: "LabelButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelButtonTableViewCell")
         tableView.register(UINib(nibName: "TextFieldButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldButtonTableViewCell")
+        tableView.register(UINib(nibName: "SeparatorTableViewCell", bundle: nil), forCellReuseIdentifier: "SeparatorTableViewCell")
 
         tableView.dataSource = dataSource
 
@@ -29,7 +30,14 @@ class RegistratioinViewModel {
 
     public func getData() {
 
-        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"), TextfieldCell(subtitileText: "Имя"), TextfieldCell(subtitileText: "Возраст"), LabelButtonCell(), TextfieldButtonCell(subtitileText: "Имя"), TextfieldButtonCell(subtitileText: "Возраст")]
+        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"),
+                                    TextfieldCell(subtitileText: "Имя"),
+                                    TextfieldCell(subtitileText: "Возраст"),
+                                    LabelButtonCell(),
+                                    TextfieldButtonCell(subtitileText: "Имя"),
+                                    TextfieldButtonCell(subtitileText: "Возраст"),
+                                    SeparatorCell()]
+
         self.updateTable(cells: cells)
     }
 
@@ -69,7 +77,13 @@ class RegistratioinViewModel {
                     for: indexPath) as? TextFieldButtonTableViewCell
                 cell?.textfieldNameLabel.text = textfieldButtonCell.subtitileText
                 return cell
-            }else {
+            } else if let textfieldButtonCell = item as? SeparatorCell {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: "SeparatorTableViewCell",
+                    for: indexPath) as? SeparatorTableViewCell
+
+                return cell
+            } else {
                 fatalError("Unknown cell type")
             }
         }
@@ -90,4 +104,6 @@ class RegistratioinViewModel {
         var subtitileText: String
     }
 
+    struct SeparatorCell: Hashable {
+    }
 }
