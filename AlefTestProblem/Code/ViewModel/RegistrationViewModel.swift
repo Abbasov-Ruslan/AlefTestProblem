@@ -49,8 +49,9 @@ class RegistratioinViewModel {
         defer {
             dataSource.apply(snapshot, animatingDifferences: tableView.window != nil)
         }
-        snapshot.appendSections([.emptySection])
-        snapshot.appendItems(cells, toSection: .emptySection)
+        snapshot.appendSections([.mainSection])
+        snapshot.appendItems(cells, toSection: .mainSection)
+
     }
 
     public func makeDataSource() -> DiffableViewDataSource {

@@ -20,5 +20,5 @@ class DiffableViewDataSource: UITableViewDiffableDataSource<Section, AnyHashable
 }
 
 enum Section: String, CaseIterable, Hashable {
-    case emptySection = ""
+    case mainSection = ""
 }
