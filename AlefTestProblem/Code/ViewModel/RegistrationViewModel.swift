@@ -16,6 +16,7 @@ class RegistratioinViewModel {
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
         tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
         tableView.register(UINib(nibName: "LabelButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelButtonTableViewCell")
+        tableView.register(UINib(nibName: "TextFieldButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldButtonTableViewCell")
 
         tableView.dataSource = dataSource
 
@@ -28,7 +29,7 @@ class RegistratioinViewModel {
 
     public func getData() {
 
-        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"), TextfieldCell(subtitileText: "Имя"), TextfieldCell(subtitileText: "Возраст"), LabelButtonCell()]
+        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"), TextfieldCell(subtitileText: "Имя"), TextfieldCell(subtitileText: "Возраст"), LabelButtonCell(), TextfieldButtonCell(subtitileText: "Имя"), TextfieldButtonCell(subtitileText: "Возраст")]
         self.updateTable(cells: cells)
     }
 
@@ -50,19 +51,25 @@ class RegistratioinViewModel {
 
                 cell?.label.text = labelCell.labelText
                 return cell
-            } else if let labelCell = item as? TextfieldCell {
+            } else if let textfieldCell = item as? TextfieldCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldTableViewCell",
                     for: indexPath) as? TextFieldTableViewCell
                 
-                cell?.subtitleLabel.text = labelCell.subtitileText
+                cell?.subtitleLabel.text = textfieldCell.subtitileText
                 return cell
-            } else if let labelCell = item as? LabelButtonCell {
+            } else if let labelButtonCell = item as? LabelButtonCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "LabelButtonTableViewCell",
                     for: indexPath) as? LabelButtonTableViewCell
                 return cell
-            } else {
+            } else if let textfieldButtonCell = item as? TextfieldButtonCell {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: "TextFieldButtonTableViewCell",
+                    for: indexPath) as? TextFieldButtonTableViewCell
+                cell?.textfieldNameLabel.text = textfieldButtonCell.subtitileText
+                return cell
+            }else {
                 fatalError("Unknown cell type")
             }
         }
@@ -77,6 +84,10 @@ class RegistratioinViewModel {
     }
 
     struct LabelButtonCell: Hashable {
+    }
+
+    struct TextfieldButtonCell: Hashable {
+        var subtitileText: String
     }
 
 }
