@@ -15,6 +15,7 @@ class RegistratioinViewModel {
     init() {
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
         tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
+        tableView.register(UINib(nibName: "LabelButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelButtonTableViewCell")
 
         tableView.dataSource = dataSource
 
@@ -27,7 +28,7 @@ class RegistratioinViewModel {
 
     public func getData() {
 
-        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"), TextfieldCell(subtitileText: "Имя"), TextfieldCell(subtitileText: "Возраст ")]
+        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"), TextfieldCell(subtitileText: "Имя"), TextfieldCell(subtitileText: "Возраст"), LabelButtonCell()]
         self.updateTable(cells: cells)
     }
 
@@ -56,6 +57,11 @@ class RegistratioinViewModel {
                 
                 cell?.subtitleLabel.text = labelCell.subtitileText
                 return cell
+            } else if let labelCell = item as? LabelButtonCell {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: "LabelButtonTableViewCell",
+                    for: indexPath) as? LabelButtonTableViewCell
+                return cell
             } else {
                 fatalError("Unknown cell type")
             }
@@ -68,6 +74,9 @@ class RegistratioinViewModel {
 
     struct TextfieldCell: Hashable {
         var subtitileText: String
+    }
+
+    struct LabelButtonCell: Hashable {
     }
 
 }
