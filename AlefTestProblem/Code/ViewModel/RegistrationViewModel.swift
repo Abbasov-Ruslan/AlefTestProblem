@@ -13,7 +13,11 @@ class RegistratioinViewModel {
     lazy var dataSource: DiffableViewDataSource = makeDataSource()
     public var tableView: UITableView = RegisterTableView()
     var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
+    var AddChildInformationSubject = PassthroughSubject<Void, Never>()
     private var subscriptions = Set<AnyCancellable>()
+    var childrenCellIndex = 0
+    var firstSubscribeAddChildFlag = true
+    var firstSubscribeClearAllFlag = true
 
     init() {
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
@@ -35,20 +39,31 @@ class RegistratioinViewModel {
                                     TextfieldCell(subtitileText: "Возраст"),
                                     LabelButtonCell(),
                                     ButtonCell()]
+
         self.updateTable(cells: cells)
     }
 
     public func AddChildCells() {
         let childCells: [AnyHashable]  = [
-            TextfieldButtonCell(subtitileText: "Имя"),
-            TextfieldButtonCell(subtitileText: "Возраст"),
-            SeparatorCell()]
+            TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex),
+            TextfieldButtonCell(subtitileText: "Возраст", index: childrenCellIndex),
+            SeparatorCell(index: childrenCellIndex)]
 
         remove(ButtonCell(), animate: false)
         var snapshot = dataSource.snapshot()
         snapshot.appendItems(childCells, toSection: .mainSection)
         snapshot.appendItems([ButtonCell()], toSection: .mainSection)
         dataSource.apply(snapshot, animatingDifferences: false)
+
+        increaseChildrenIndexNumber()
+    }
+
+    private func increaseChildrenIndexNumber() {
+        childrenCellIndex += 1
+    }
+
+    private func decreaseChildrenIndexNumber() {
+        childrenCellIndex -= 1
     }
 
     public func updateTable(cells: [AnyHashable]) {
@@ -79,15 +94,27 @@ class RegistratioinViewModel {
                     withIdentifier: "TextFieldTableViewCell",
                     for: indexPath) as? TextFieldTableViewCell
                 cell?.subtitleLabel.text = textfieldCell.subtitileText
-//                cell?.clearTextFieldSubject = self.clearaAllInformationSubject
-                self.clearaAllInformationSubject.sink { _ in
-                    cell?.clearTextFieldSubject.send()
-                }.store(in: &self.subscriptions)
+                if self.childrenCellIndex <= 0 {
+                    self.clearaAllInformationSubject.sink { _ in
+                        cell?.clearTextFieldSubject.send()
+                    }.store(in: &self.subscriptions)
+                }
                 return cell
             } else if item is LabelButtonCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "LabelButtonTableViewCell",
                     for: indexPath) as? LabelButtonTableViewCell
+                if self.firstSubscribeAddChildFlag {
+                    self.firstSubscribeAddChildFlag = false
+                    cell?.pressSubject.sink(receiveValue: { [weak self] _ in
+                        guard let childrenCellIndex = self?.childrenCellIndex else {
+                            return
+                        }
+                        if childrenCellIndex < 5 {
+                            self?.AddChildCells()
+                        }
+                    }).store(in: &self.subscriptions)
+                }
                 return cell
             } else if let textfieldButtonCell = item as? TextfieldButtonCell {
                 let cell = tableView.dequeueReusableCell(
@@ -104,13 +131,12 @@ class RegistratioinViewModel {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "ButtonTableViewCell",
                     for: indexPath) as? ButtonTableViewCell
-//                cell?.tapSubject.sink(receiveValue: { [weak self] _ in
-//                    self?.clearaAllInformationSubject.send()
-//                }).store(in: &self.subscribers)
-//                self.clearaAllInformationSubject =  cell?.tapSubject ?? PassthroughSubject<Void, Never>()
-                cell?.tapSubject.sink(receiveValue: { [weak self] _ in
-                    self?.clearaAllInformationSubject.send()
-                }).store(in: &self.subscriptions)
+                if self.firstSubscribeClearAllFlag {
+                    self.firstSubscribeClearAllFlag = false
+                    cell?.tapSubject.sink(receiveValue: { [weak self] _ in
+                        self?.clearaAllInformationSubject.send()
+                    }).store(in: &self.subscriptions)
+                }
                 return cell
             } else {
                 fatalError("Unknown cell type")
@@ -135,9 +161,11 @@ class RegistratioinViewModel {
 
     struct TextfieldButtonCell: Hashable {
         var subtitileText: String
+        var index: Int
     }
 
     struct SeparatorCell: Hashable {
+        var index: Int
     }
 
     struct ButtonCell: Hashable {

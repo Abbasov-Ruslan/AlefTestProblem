@@ -6,9 +6,19 @@
 //
 
 import UIKit
+import Combine
 
 class LabelButtonTableViewCell: UITableViewCell {
-    @IBOutlet weak var addButton: UIButton!
+
+    let pressSubject = PassthroughSubject<Void, Never>()
+
+    @IBOutlet private weak var addButton: UIButton!
+
+    @IBAction private func buttonPress(_ sender: Any) {
+        pressSubject.send()
+    }
+
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -16,12 +26,6 @@ class LabelButtonTableViewCell: UITableViewCell {
 
         addButton.layer.borderWidth  = 2.0
         addButton.layer.cornerRadius =  addButton.frame.size.height / 2
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }
