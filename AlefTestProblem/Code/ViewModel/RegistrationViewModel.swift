@@ -26,6 +26,7 @@ class RegistratioinViewModel {
         tableView.register(UINib(nibName: "TextFieldButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldButtonTableViewCell")
         tableView.register(UINib(nibName: "SeparatorTableViewCell", bundle: nil), forCellReuseIdentifier: "SeparatorTableViewCell")
         tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "ButtonTableViewCell")
+        tableView.register(UINib(nibName: "TextFieldHalfTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldHalfTableViewCell")
 
         tableView.dataSource = dataSource
 
@@ -46,7 +47,7 @@ class RegistratioinViewModel {
     public func AddChildCells() {
         let childCells: [AnyHashable]  = [
             TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex),
-            TextfieldButtonCell(subtitileText: "Возраст", index: childrenCellIndex),
+            TextfieldHalfCell(subtitileText: "Возраст", index: childrenCellIndex),
             SeparatorCell(index: childrenCellIndex)]
 
         remove(ButtonCell(), animate: false)
@@ -122,6 +123,12 @@ class RegistratioinViewModel {
                     for: indexPath) as? TextFieldButtonTableViewCell
                 cell?.textfieldNameLabel.text = textfieldButtonCell.subtitileText
                 return cell
+            }  else if let textfieldHalfCell = item as? TextfieldHalfCell {
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: "TextFieldHalfTableViewCell",
+                    for: indexPath) as? TextFieldHalfTableViewCell
+                cell?.subtitleLabel.text = textfieldHalfCell.subtitileText
+                return cell
             } else if item is SeparatorCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "SeparatorTableViewCell",
@@ -160,6 +167,11 @@ class RegistratioinViewModel {
     }
 
     struct TextfieldButtonCell: Hashable {
+        var subtitileText: String
+        var index: Int
+    }
+
+    struct TextfieldHalfCell: Hashable {
         var subtitileText: String
         var index: Int
     }

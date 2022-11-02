@@ -58,6 +58,7 @@
             <viewLayoutGuide key="safeArea" id="BIX-Eq-xVL"/>
             <connections>
                 <outlet property="borderView" destination="SGB-Go-b25" id="lsr-sX-TMw"/>
+                <outlet property="button" destination="f1d-9E-WLI" id="83G-y7-b9a"/>
                 <outlet property="textfield" destination="IOO-Z0-qHL" id="rrj-51-ICg"/>
                 <outlet property="textfieldNameLabel" destination="3cd-EM-rSj" id="wEl-um-KS0"/>
             </connections>
