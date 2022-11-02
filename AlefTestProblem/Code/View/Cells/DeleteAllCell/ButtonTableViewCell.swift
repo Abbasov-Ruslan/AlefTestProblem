@@ -6,9 +6,16 @@
 //
 
 import UIKit
+import Combine
 
 class ButtonTableViewCell: UITableViewCell {
+
+    let tapSubject = PassthroughSubject<Void, Never>()
+  
     @IBOutlet weak var deleteAllButton: UIButton!
+    @IBAction func buttonTap(_ sender: Any) {
+        tapAction()
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -16,12 +23,12 @@ class ButtonTableViewCell: UITableViewCell {
 
         deleteAllButton.layer.borderWidth  = 2.0
         deleteAllButton.layer.cornerRadius =  deleteAllButton.frame.size.height / 2
+
+
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func tapAction() {
+        tapSubject.send()
     }
     
 }

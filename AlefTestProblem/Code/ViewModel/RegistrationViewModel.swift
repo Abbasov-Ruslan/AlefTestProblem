@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 class RegistratioinViewModel {
 
     lazy var dataSource: DiffableViewDataSource = makeDataSource()
     public var tableView: UITableView = RegisterTableView()
+    var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
+    private var subscriptions = Set<AnyCancellable>()
 
     init() {
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
@@ -55,10 +58,9 @@ class RegistratioinViewModel {
         }
         snapshot.appendSections([.mainSection])
         snapshot.appendItems(cells, toSection: .mainSection)
-
     }
 
-    public func remove(_ cell: AnyHashable, animate: Bool = true) {
+    public func remove(_ cell: AnyHashable, animate: Bool = false) {
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems([cell])
         dataSource.apply(snapshot, animatingDifferences: false)
@@ -70,15 +72,17 @@ class RegistratioinViewModel {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "LabelTableViewCell",
                     for: indexPath) as? LabelTableViewCell
-
                 cell?.label.text = labelCell.labelText
                 return cell
             } else if let textfieldCell = item as? TextfieldCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldTableViewCell",
                     for: indexPath) as? TextFieldTableViewCell
-                
                 cell?.subtitleLabel.text = textfieldCell.subtitileText
+//                cell?.clearTextFieldSubject = self.clearaAllInformationSubject
+                self.clearaAllInformationSubject.sink { _ in
+                    cell?.clearTextFieldSubject.send()
+                }.store(in: &self.subscriptions)
                 return cell
             } else if item is LabelButtonCell {
                 let cell = tableView.dequeueReusableCell(
@@ -95,18 +99,27 @@ class RegistratioinViewModel {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "SeparatorTableViewCell",
                     for: indexPath) as? SeparatorTableViewCell
-
                 return cell
             } else if item is ButtonCell {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "ButtonTableViewCell",
                     for: indexPath) as? ButtonTableViewCell
-
+//                cell?.tapSubject.sink(receiveValue: { [weak self] _ in
+//                    self?.clearaAllInformationSubject.send()
+//                }).store(in: &self.subscribers)
+//                self.clearaAllInformationSubject =  cell?.tapSubject ?? PassthroughSubject<Void, Never>()
+                cell?.tapSubject.sink(receiveValue: { [weak self] _ in
+                    self?.clearaAllInformationSubject.send()
+                }).store(in: &self.subscriptions)
                 return cell
             } else {
                 fatalError("Unknown cell type")
             }
         }
+    }
+
+    func clearTextfieldCells() {
+
     }
 
     struct LabelCell: Hashable {

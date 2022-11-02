@@ -25,6 +25,9 @@
                         <state key="normal" title="Очистить">
                             <color key="titleColor" systemColor="systemRedColor"/>
                         </state>
+                        <connections>
+                            <action selector="buttonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2g9-Sd-pUs"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
