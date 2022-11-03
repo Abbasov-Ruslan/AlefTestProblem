@@ -40,26 +40,40 @@ class RegistratioinViewModel {
     }
 
     public func addChildCells() {
-        cellsList.insert(TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex), at: cellsList.count - 1)
-        cellsList.insert(TextfieldHalfCell(subtitileText: "Возраст", index: childrenCellIndex), at: cellsList.count - 1)
-        cellsList.insert(SeparatorCell(index: childrenCellIndex), at: cellsList.count - 1)
+        cellsList.insert(TextfieldButtonCell(subtitileText: "Имя", index: cellsList.count - 1), at: cellsList.count - 1)
+        cellsList.insert(TextfieldHalfCell(subtitileText: "Возраст", index: cellsList.count - 1), at: cellsList.count - 1)
+        cellsList.insert(SeparatorCell(index: cellsList.count - 1), at: cellsList.count - 1)
         createSnapshot()
         increaseChildrenIndexNumber()
     }
 
-    public func removeChildCells() {
-        cellsList.remove(at: cellsList.count - 2)
-        cellsList.remove(at: cellsList.count - 2)
-        cellsList.remove(at: cellsList.count - 2)
-        createSnapshot()
+    public func removeChildCells(index: Int) {
+        //        cellsList.remove(at: cellsList.count - 2)
+        //        cellsList.remove(at: cellsList.count - 2)
+        //        cellsList.remove(at: cellsList.count - 2)
+
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems([SeparatorCell(index: index + 2)])
+        snapshot.deleteItems([TextfieldButtonCell(subtitileText: "Имя", index: index + 1)])
+        snapshot.deleteItems([TextfieldHalfCell(subtitileText: "Возраст", index: index)])
+
+                cellsList.remove(at: index + 2)
+                cellsList.remove(at: index + 1)
+                cellsList.remove(at: index)
+        
+
+        snapshot.appendItems(cellsList,toSection:.Main)
+        dataSource.apply(snapshot, animatingDifferences:false)
+
+
+//        createSnapshot()
         decreaseChildrenIndexNumber()
     }
 
     func createSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.Main])
-        snapshot.appendItems(cellsList,toSection:.Main)
-        dataSource.apply(snapshot, animatingDifferences:false)
+
     }
 
     private func increaseChildrenIndexNumber() {
@@ -111,12 +125,12 @@ class RegistratioinViewModel {
                         for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
 
                 cell.textfieldNameLabel.text = textfieldButtonCell.subtitileText
-                cell.indexPath = indexPath
+                cell.index = textfieldButtonCell.index
 
                 if !(cell.isSubscribedFlag ) {
                     cell.isSubscribedFlag = true
-                    cell.cancellable =  cell.pressSubject.compactMap{$0} .sink { [weak self, indexPath] indexPath2 in
-                        self?.removeChildCells()
+                    cell.cancellable =  cell.pressSubject.compactMap{$0} .sink { [weak self] index in
+                        self?.removeChildCells(index: index)
                     }
                 }
 
