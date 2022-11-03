@@ -20,10 +20,10 @@ class RegistratioinViewModel {
     var firstSubscribeClearAllFlag = true
 
     var cellsList: [AnyHashable] = [LabelCell(labelText: "Персональные данные"),
-                                TextfieldCell(subtitileText: "Имя"),
-                                TextfieldCell(subtitileText: "Возраст"),
-                                LabelButtonCell(),
-                                ButtonCell()]
+                                    TextfieldCell(subtitileText: "Имя"),
+                                    TextfieldCell(subtitileText: "Возраст"),
+                                    LabelButtonCell(),
+                                    ButtonCell()]
 
     init() {
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
@@ -39,13 +39,17 @@ class RegistratioinViewModel {
         createSnapshot()
     }
 
-    public func addChildCell() {
+    public func addChildCells() {
         cellsList.insert(TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex), at: cellsList.count - 1)
+        cellsList.insert(TextfieldHalfCell(subtitileText: "Возраст", index: childrenCellIndex), at: cellsList.count - 1)
+        cellsList.insert(SeparatorCell(index: childrenCellIndex), at: cellsList.count - 1)
         createSnapshot()
         increaseChildrenIndexNumber()
     }
 
     public func removeChildCells() {
+        cellsList.remove(at: cellsList.count - 2)
+        cellsList.remove(at: cellsList.count - 2)
         cellsList.remove(at: cellsList.count - 2)
         createSnapshot()
         decreaseChildrenIndexNumber()
@@ -96,14 +100,14 @@ class RegistratioinViewModel {
                             return
                         }
                         if childrenCellIndex < 5 {
-                            self?.addChildCell()
+                            self?.addChildCells()
                         }
                     }).store(in: &self.subscriptions)
                 }
                 return cell
             } else if let textfieldButtonCell = item as? TextfieldButtonCell {
                 guard let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "TextFieldButtonTableViewCell",
+                        withIdentifier: "TextFieldButtonTableViewCell",
                         for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
 
                 cell.textfieldNameLabel.text = textfieldButtonCell.subtitileText
