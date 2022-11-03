@@ -22,7 +22,8 @@ class RegistratioinViewModel {
     var cellsList: [AnyHashable] = [LabelCell(labelText: "Персональные данные"),
                                 TextfieldCell(subtitileText: "Имя"),
                                 TextfieldCell(subtitileText: "Возраст"),
-                                LabelButtonCell()]
+                                LabelButtonCell(),
+                                ButtonCell()]
 
     init() {
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
@@ -39,35 +40,23 @@ class RegistratioinViewModel {
     }
 
     public func getData() {
-
-        let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"),
-                                    TextfieldCell(subtitileText: "Имя"),
-                                    TextfieldCell(subtitileText: "Возраст"),
-                                    LabelButtonCell()]
-//                                    ButtonCell()]
-
-        self.updateTable(cells: cells)
+        self.updateTable(cells: cellsList)
     }
 
     public func AddChildCells() {
-//        let childCells: [AnyHashable]  = [
-//            TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex)]
-//            TextfieldHalfCell(subtitileText: "Возраст", index: childrenCellIndex),
-//            SeparatorCell(index: childrenCellIndex)]
-
-//        remove(ButtonCell(), animate: false)
         cellsList.append(TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex))
         createSnapshot()
-//        var snapshot = dataSource.snapshot()
-//        snapshot.appendItems(cellsList, toSection: .Main)
-//        snapshot.appendItems([ButtonCell()], toSection: .mainSection)
-//        dataSource.apply(snapshot, animatingDifferences: false)
-
         increaseChildrenIndexNumber()
     }
 
-    public func removechildCells() {
-        cellsList.removeLast()
+    public func addChildCell() {
+        cellsList.insert(TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex), at: cellsList.count - 1)
+        createSnapshot()
+        increaseChildrenIndexNumber()
+    }
+
+    public func removeChildCells() {
+        cellsList.remove(at: cellsList.count - 2)
         createSnapshot()
         decreaseChildrenIndexNumber()
     }
@@ -102,20 +91,6 @@ class RegistratioinViewModel {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 
-    func removeChildCells(index: Int) {
-        remove(TextfieldButtonCell(subtitileText: "Имя", index: index))
-        remove(TextfieldHalfCell(subtitileText: "Возраст", index: index))
-        remove(SeparatorCell(index: index))
-        decreaseChildrenIndexNumber()
-    }
-
-    func removeChildCell(indexPath: IndexPath) {
-        guard let objectIClickedOnto = dataSource.itemIdentifier(for: indexPath) else { return }
-        var snapshot = dataSource.snapshot()
-        snapshot.deleteItems([objectIClickedOnto])
-        dataSource.apply(snapshot)
-    }
-
     public func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
             if let labelCell = item as? LabelCell {
@@ -146,7 +121,7 @@ class RegistratioinViewModel {
                             return
                         }
                         if childrenCellIndex < 5 {
-                            self?.AddChildCells()
+                            self?.addChildCell()
                         }
                     }).store(in: &self.subscriptions)
                 }
@@ -164,7 +139,7 @@ class RegistratioinViewModel {
                     cell.cancellable =  cell.pressSubject.compactMap{$0} .sink { [weak self, indexPath] indexPath2 in
 //                        guard let indexPath = cell.indexPath else { return }
 //                        self?.removeChildCell(indexPath: indexPath)
-                        self?.removechildCells()
+                        self?.removeChildCells()
                     }
                 }
 
