@@ -10,30 +10,25 @@ import Combine
 
 class RegistratioinViewModel {
 
-    lazy var dataSource: DiffableViewDataSource = makeDataSource()
-    public var tableView: UITableView = RegisterTableView()
-    var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
-    var AddChildInformationSubject = PassthroughSubject<Void, Never>()
+    private lazy var dataSource: DiffableViewDataSource = makeDataSource()
+    private var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
+    private var AddChildInformationSubject = PassthroughSubject<Void, Never>()
     private var subscriptions = Set<AnyCancellable>()
-    var childrenCellIndex = 0
-    var firstSubscribeAddChildFlag = true
-    var firstSubscribeClearAllFlag = true
+    private var childrenCellIndex = 0
+    private var firstSubscribeAddChildFlag = true
+    private var firstSubscribeClearAllFlag = true
+    private var cellsList: [AnyHashable] = []
 
-    var cellsList: [AnyHashable] = [LabelCell(labelText: "Персональные данные"),
-                                    TextfieldCell(subtitileText: "Имя"),
-                                    TextfieldCell(subtitileText: "Возраст"),
-                                    LabelButtonCell(),
-                                    ButtonCell()]
+    public var tableView: UITableView = RegisterTableView()
 
     init() {
+        createCellList(cellList: cellsList)
         registerAllCells()
-
         tableView.dataSource = dataSource
-
         createSnapshot()
     }
 
-    public func addChildCells() {
+    private func addChildCells() {
         cellsList.insert(TextfieldButtonCell(subtitileText: "Имя", index: cellsList.count - 1), at: cellsList.count - 1)
         cellsList.insert(TextfieldHalfCell(subtitileText: "Возраст", index: cellsList.count - 1), at: cellsList.count - 1)
         cellsList.insert(SeparatorCell(index: cellsList.count - 1), at: cellsList.count - 1)
@@ -41,7 +36,7 @@ class RegistratioinViewModel {
         increaseChildrenIndexNumber()
     }
 
-    public func removeChildCells(index: Int) {
+    private func removeChildCells(index: Int) {
         cellsList.remove(at: cellsList.count - 2)
         cellsList.remove(at: cellsList.count - 2)
         cellsList.remove(at: cellsList.count - 2)
@@ -50,7 +45,7 @@ class RegistratioinViewModel {
         decreaseChildrenIndexNumber()
     }
 
-    func createSnapshot() {
+    private func createSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.Main])
         snapshot.appendItems(cellsList,toSection:.Main)
@@ -65,7 +60,32 @@ class RegistratioinViewModel {
         childrenCellIndex -= 1
     }
 
-    public func makeDataSource() -> DiffableViewDataSource {
+    private func registerAllCells() {
+        registerCell(nibName: "LabelTableViewCell", reuseIdentifier: "LabelTableViewCell")
+        registerCell(nibName: "LabelButtonTableViewCell", reuseIdentifier: "LabelButtonTableViewCell")
+        registerCell(nibName: "TextFieldButtonTableViewCell", reuseIdentifier: "TextFieldButtonTableViewCell")
+        registerCell(nibName: "SeparatorTableViewCell", reuseIdentifier: "SeparatorTableViewCell")
+        registerCell(nibName: "ButtonTableViewCell", reuseIdentifier: "ButtonTableViewCell")
+        registerCell(nibName: "TextFieldHalfTableViewCell", reuseIdentifier: "TextFieldHalfTableViewCell")
+        registerCell(nibName: "TextFieldTableViewCell", reuseIdentifier: "TextFieldTableViewCell")
+    }
+
+    private func registerCell(nibName: String, reuseIdentifier: String) {
+        tableView.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+    }
+
+    private func createCellList(cellList: [AnyHashable]) {
+        cellsList = [LabelCell(labelText: "Персональные данные"),
+        TextfieldCell(subtitileText: "Имя"),
+        TextfieldCell(subtitileText: "Возраст"),
+        LabelButtonCell(),
+        ButtonCell()]
+    }
+}
+
+
+extension RegistratioinViewModel {
+    private func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
             if let labelCell = item as? LabelCell {
                 let cell = tableView.dequeueReusableCell(
@@ -143,20 +163,4 @@ class RegistratioinViewModel {
             }
         }
     }
-
-    private func registerAllCells() {
-        registerCell(nibName: "LabelTableViewCell", reuseIdentifier: "LabelTableViewCell")
-        registerCell(nibName: "LabelButtonTableViewCell", reuseIdentifier: "LabelButtonTableViewCell")
-        registerCell(nibName: "TextFieldButtonTableViewCell", reuseIdentifier: "TextFieldButtonTableViewCell")
-        registerCell(nibName: "SeparatorTableViewCell", reuseIdentifier: "SeparatorTableViewCell")
-        registerCell(nibName: "ButtonTableViewCell", reuseIdentifier: "ButtonTableViewCell")
-        registerCell(nibName: "TextFieldHalfTableViewCell", reuseIdentifier: "TextFieldHalfTableViewCell")
-        registerCell(nibName: "TextFieldTableViewCell", reuseIdentifier: "TextFieldTableViewCell")
-    }
-
-    private func registerCell(nibName: String, reuseIdentifier: String) {
-        tableView.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
-    }
 }
-
-
