@@ -26,13 +26,7 @@ class RegistratioinViewModel {
                                     ButtonCell()]
 
     init() {
-        tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
-        tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
-        tableView.register(UINib(nibName: "LabelButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelButtonTableViewCell")
-        tableView.register(UINib(nibName: "TextFieldButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldButtonTableViewCell")
-        tableView.register(UINib(nibName: "SeparatorTableViewCell", bundle: nil), forCellReuseIdentifier: "SeparatorTableViewCell")
-        tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: "ButtonTableViewCell")
-        tableView.register(UINib(nibName: "TextFieldHalfTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldHalfTableViewCell")
+        registerAllCells()
 
         tableView.dataSource = dataSource
 
@@ -154,31 +148,19 @@ class RegistratioinViewModel {
 
     }
 
-    struct LabelCell: Hashable {
-        var labelText: String
+    private func registerAllCells() {
+        registerCell(nibName: "LabelTableViewCell", reuseIdentifier: "LabelTableViewCell")
+        registerCell(nibName: "LabelButtonTableViewCell", reuseIdentifier: "LabelButtonTableViewCell")
+        registerCell(nibName: "TextFieldButtonTableViewCell", reuseIdentifier: "TextFieldButtonTableViewCell")
+        registerCell(nibName: "SeparatorTableViewCell", reuseIdentifier: "SeparatorTableViewCell")
+        registerCell(nibName: "ButtonTableViewCell", reuseIdentifier: "ButtonTableViewCell")
+        registerCell(nibName: "TextFieldHalfTableViewCell", reuseIdentifier: "TextFieldHalfTableViewCell")
+        registerCell(nibName: "TextFieldTableViewCell", reuseIdentifier: "TextFieldTableViewCell")
     }
 
-    struct TextfieldCell: Hashable {
-        var subtitileText: String
-    }
-
-    struct LabelButtonCell: Hashable {
-    }
-
-    struct TextfieldButtonCell: Hashable {
-        var subtitileText: String
-        var index: Int
-    }
-
-    struct TextfieldHalfCell: Hashable {
-        var subtitileText: String
-        var index: Int
-    }
-
-    struct SeparatorCell: Hashable {
-        var index: Int
-    }
-
-    struct ButtonCell: Hashable {
+    private func registerCell(nibName: String, reuseIdentifier: String) {
+        tableView.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
     }
 }
+
+
