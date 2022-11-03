@@ -6,13 +6,24 @@
 //
 
 import UIKit
+import Combine
 
 class TextFieldButtonTableViewCell: UITableViewCell {
+    public let pressSubject = PassthroughSubject<IndexPath?, Never>()
+    var indexPath: IndexPath?
+    public var isSubscribedFlag = false
+
+    public var cancellable: AnyCancellable?
+
     @IBOutlet weak var textfieldNameLabel: UILabel!
     @IBOutlet weak var textfield: UITextField!
-    @IBOutlet weak var button: UIButton!
-
     @IBOutlet weak var borderView: UIView!
+
+
+    @IBAction func buttonPress(_ sender: Any) {
+        self.pressSubject.send(indexPath)
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         borderView.layer.borderWidth = 1

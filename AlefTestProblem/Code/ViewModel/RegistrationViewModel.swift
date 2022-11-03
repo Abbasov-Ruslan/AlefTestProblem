@@ -19,6 +19,11 @@ class RegistratioinViewModel {
     var firstSubscribeAddChildFlag = true
     var firstSubscribeClearAllFlag = true
 
+    var cellsList: [AnyHashable] = [LabelCell(labelText: "Персональные данные"),
+                                TextfieldCell(subtitileText: "Имя"),
+                                TextfieldCell(subtitileText: "Возраст"),
+                                LabelButtonCell()]
+
     init() {
         tableView.register(UINib(nibName: "LabelTableViewCell", bundle: nil), forCellReuseIdentifier: "LabelTableViewCell")
         tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: "TextFieldTableViewCell")
@@ -38,25 +43,40 @@ class RegistratioinViewModel {
         let cells: [AnyHashable] = [LabelCell(labelText: "Персональные данные"),
                                     TextfieldCell(subtitileText: "Имя"),
                                     TextfieldCell(subtitileText: "Возраст"),
-                                    LabelButtonCell(),
-                                    ButtonCell()]
+                                    LabelButtonCell()]
+//                                    ButtonCell()]
 
         self.updateTable(cells: cells)
     }
 
     public func AddChildCells() {
-        let childCells: [AnyHashable]  = [
-            TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex),
-            TextfieldHalfCell(subtitileText: "Возраст", index: childrenCellIndex),
-            SeparatorCell(index: childrenCellIndex)]
+//        let childCells: [AnyHashable]  = [
+//            TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex)]
+//            TextfieldHalfCell(subtitileText: "Возраст", index: childrenCellIndex),
+//            SeparatorCell(index: childrenCellIndex)]
 
-        remove(ButtonCell(), animate: false)
-        var snapshot = dataSource.snapshot()
-        snapshot.appendItems(childCells, toSection: .mainSection)
-        snapshot.appendItems([ButtonCell()], toSection: .mainSection)
-        dataSource.apply(snapshot, animatingDifferences: false)
+//        remove(ButtonCell(), animate: false)
+        cellsList.append(TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex))
+        createSnapshot()
+//        var snapshot = dataSource.snapshot()
+//        snapshot.appendItems(cellsList, toSection: .Main)
+//        snapshot.appendItems([ButtonCell()], toSection: .mainSection)
+//        dataSource.apply(snapshot, animatingDifferences: false)
 
         increaseChildrenIndexNumber()
+    }
+
+    public func removechildCells() {
+        cellsList.removeLast()
+        createSnapshot()
+        decreaseChildrenIndexNumber()
+    }
+
+    func createSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        snapshot.appendSections([.Main])
+        snapshot.appendItems(cellsList,toSection:.Main)
+        dataSource.apply(snapshot, animatingDifferences:false)
     }
 
     private func increaseChildrenIndexNumber() {
@@ -72,14 +92,28 @@ class RegistratioinViewModel {
         defer {
             dataSource.apply(snapshot, animatingDifferences: tableView.window != nil)
         }
-        snapshot.appendSections([.mainSection])
-        snapshot.appendItems(cells, toSection: .mainSection)
+        snapshot.appendSections([.Main])
+        snapshot.appendItems(cells, toSection: .Main)
     }
 
     public func remove(_ cell: AnyHashable, animate: Bool = false) {
         var snapshot = dataSource.snapshot()
         snapshot.deleteItems([cell])
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+
+    func removeChildCells(index: Int) {
+        remove(TextfieldButtonCell(subtitileText: "Имя", index: index))
+        remove(TextfieldHalfCell(subtitileText: "Возраст", index: index))
+        remove(SeparatorCell(index: index))
+        decreaseChildrenIndexNumber()
+    }
+
+    func removeChildCell(indexPath: IndexPath) {
+        guard let objectIClickedOnto = dataSource.itemIdentifier(for: indexPath) else { return }
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems([objectIClickedOnto])
+        dataSource.apply(snapshot)
     }
 
     public func makeDataSource() -> DiffableViewDataSource {
@@ -118,10 +152,22 @@ class RegistratioinViewModel {
                 }
                 return cell
             } else if let textfieldButtonCell = item as? TextfieldButtonCell {
-                let cell = tableView.dequeueReusableCell(
+                guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldButtonTableViewCell",
-                    for: indexPath) as? TextFieldButtonTableViewCell
-                cell?.textfieldNameLabel.text = textfieldButtonCell.subtitileText
+                        for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
+
+                cell.textfieldNameLabel.text = textfieldButtonCell.subtitileText
+                cell.indexPath = indexPath
+
+                if !(cell.isSubscribedFlag ) {
+                    cell.isSubscribedFlag = true
+                    cell.cancellable =  cell.pressSubject.compactMap{$0} .sink { [weak self, indexPath] indexPath2 in
+//                        guard let indexPath = cell.indexPath else { return }
+//                        self?.removeChildCell(indexPath: indexPath)
+                        self?.removechildCells()
+                    }
+                }
+
                 return cell
             }  else if let textfieldHalfCell = item as? TextfieldHalfCell {
                 let cell = tableView.dequeueReusableCell(
