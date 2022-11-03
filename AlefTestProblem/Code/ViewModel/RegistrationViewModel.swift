@@ -144,10 +144,6 @@ class RegistratioinViewModel {
         }
     }
 
-    func clearTextfieldCells() {
-
-    }
-
     private func registerAllCells() {
         registerCell(nibName: "LabelTableViewCell", reuseIdentifier: "LabelTableViewCell")
         registerCell(nibName: "LabelButtonTableViewCell", reuseIdentifier: "LabelButtonTableViewCell")
