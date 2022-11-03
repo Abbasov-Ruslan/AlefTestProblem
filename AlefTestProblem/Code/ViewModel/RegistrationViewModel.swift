@@ -66,12 +66,6 @@ class RegistratioinViewModel {
         childrenCellIndex -= 1
     }
 
-    public func remove(_ cell: AnyHashable, animate: Bool = false) {
-        var snapshot = dataSource.snapshot()
-        snapshot.deleteItems([cell])
-        dataSource.apply(snapshot, animatingDifferences: false)
-    }
-
     public func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
             if let labelCell = item as? LabelCell {
@@ -118,8 +112,6 @@ class RegistratioinViewModel {
                 if !(cell.isSubscribedFlag ) {
                     cell.isSubscribedFlag = true
                     cell.cancellable =  cell.pressSubject.compactMap{$0} .sink { [weak self, indexPath] indexPath2 in
-//                        guard let indexPath = cell.indexPath else { return }
-//                        self?.removeChildCell(indexPath: indexPath)
                         self?.removeChildCells()
                     }
                 }
