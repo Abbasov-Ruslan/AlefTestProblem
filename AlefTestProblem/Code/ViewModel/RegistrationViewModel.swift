@@ -48,32 +48,19 @@ class RegistratioinViewModel {
     }
 
     public func removeChildCells(index: Int) {
-        //        cellsList.remove(at: cellsList.count - 2)
-        //        cellsList.remove(at: cellsList.count - 2)
-        //        cellsList.remove(at: cellsList.count - 2)
+        cellsList.remove(at: cellsList.count - 2)
+        cellsList.remove(at: cellsList.count - 2)
+        cellsList.remove(at: cellsList.count - 2)
 
-        var snapshot = dataSource.snapshot()
-        snapshot.deleteItems([SeparatorCell(index: index + 2)])
-        snapshot.deleteItems([TextfieldButtonCell(subtitileText: "Имя", index: index + 1)])
-        snapshot.deleteItems([TextfieldHalfCell(subtitileText: "Возраст", index: index)])
-
-                cellsList.remove(at: index + 2)
-                cellsList.remove(at: index + 1)
-                cellsList.remove(at: index)
-        
-
-        snapshot.appendItems(cellsList,toSection:.Main)
-        dataSource.apply(snapshot, animatingDifferences:false)
-
-
-//        createSnapshot()
+        createSnapshot()
         decreaseChildrenIndexNumber()
     }
 
     func createSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.Main])
-
+        snapshot.appendItems(cellsList,toSection:.Main)
+        dataSource.apply(snapshot, animatingDifferences:false)
     }
 
     private func increaseChildrenIndexNumber() {
