@@ -36,17 +36,7 @@ class RegistratioinViewModel {
 
         tableView.dataSource = dataSource
 
-        getData()
-    }
-
-    public func getData() {
-        self.updateTable(cells: cellsList)
-    }
-
-    public func AddChildCells() {
-        cellsList.append(TextfieldButtonCell(subtitileText: "Имя", index: childrenCellIndex))
         createSnapshot()
-        increaseChildrenIndexNumber()
     }
 
     public func addChildCell() {
@@ -74,15 +64,6 @@ class RegistratioinViewModel {
 
     private func decreaseChildrenIndexNumber() {
         childrenCellIndex -= 1
-    }
-
-    public func updateTable(cells: [AnyHashable]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-        defer {
-            dataSource.apply(snapshot, animatingDifferences: tableView.window != nil)
-        }
-        snapshot.appendSections([.Main])
-        snapshot.appendItems(cells, toSection: .Main)
     }
 
     public func remove(_ cell: AnyHashable, animate: Bool = false) {
