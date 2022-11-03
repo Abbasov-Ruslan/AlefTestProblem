@@ -9,8 +9,9 @@ import UIKit
 import Combine
 
 class TextFieldButtonTableViewCell: UITableViewCell {
-    public let pressSubject = PassthroughSubject<Int?, Never>()
+    public let pressSubject = PassthroughSubject<UUID?, Never>()
     var index: Int?
+    var id: UUID?
     public var isSubscribedFlag = false
 
     public var cancellable: AnyCancellable?
@@ -21,7 +22,7 @@ class TextFieldButtonTableViewCell: UITableViewCell {
 
 
     @IBAction func buttonPress(_ sender: Any) {
-        self.pressSubject.send(index)
+        self.pressSubject.send(id)
     }
 
     override func awakeFromNib() {

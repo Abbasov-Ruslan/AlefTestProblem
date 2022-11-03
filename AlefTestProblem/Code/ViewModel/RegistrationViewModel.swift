@@ -17,7 +17,7 @@ class RegistratioinViewModel {
     private var childrenCellIndex = 0
     private var firstSubscribeAddChildFlag = true
     private var firstSubscribeClearAllFlag = true
-    private var cellsList: [AnyHashable] = []
+    private var cellsList: [CellType] = []
 
     public var tableView: UITableView = RegisterTableView()
 
@@ -29,17 +29,35 @@ class RegistratioinViewModel {
     }
 
     private func addChildCells() {
-        cellsList.insert(TextfieldButtonCell(subtitileText: "Имя", index: cellsList.count - 1), at: cellsList.count - 1)
-        cellsList.insert(TextfieldHalfCell(subtitileText: "Возраст", index: cellsList.count - 1), at: cellsList.count - 1)
-        cellsList.insert(SeparatorCell(index: cellsList.count - 1), at: cellsList.count - 1)
+        cellsList.insert(TextfieldButtonCell(subtitileText: "Имя"),
+                                             at: cellsList.count - 1)
+
+        cellsList.insert(TextfieldHalfCell(subtitileText: "Возраст"),
+                                           at: cellsList.count - 1)
+
+        cellsList.insert(SeparatorCell(),
+                         at: cellsList.count - 1)
         createSnapshot()
         increaseChildrenIndexNumber()
     }
 
-    private func removeChildCells(index: Int) {
-        cellsList.remove(at: cellsList.count - 2)
-        cellsList.remove(at: cellsList.count - 2)
-        cellsList.remove(at: cellsList.count - 2)
+    private func removeChildCells(id: UUID) {
+//        cellsList.remove(at: cellsList.count - 2)
+//        cellsList.remove(at: cellsList.count - 2)
+//        cellsList.remove(at: cellsList.count - 2)
+
+//        cellsList.remove(at: index + 2)
+//        cellsList.remove(at: index + 1)
+//        cellsList.remove(at: index)
+//        cellsList[index].id
+        for element in cellsList {
+            if element.id == id {
+                guard let index = cellsList.firstIndex(of: element) else { return }
+                cellsList.remove(at: index + 2)
+                cellsList.remove(at: index + 1)
+                cellsList.remove(at: index)
+            }
+        }
 
         createSnapshot()
         decreaseChildrenIndexNumber()
@@ -76,10 +94,10 @@ class RegistratioinViewModel {
 
     private func createCellList(cellList: [AnyHashable]) {
         cellsList = [LabelCell(labelText: "Персональные данные"),
-        TextfieldCell(subtitileText: "Имя"),
-        TextfieldCell(subtitileText: "Возраст"),
-        LabelButtonCell(),
-        ButtonCell()]
+                     TextfieldCell(subtitileText: "Имя"),
+                     TextfieldCell(subtitileText: "Возраст"),
+                     LabelButtonCell(),
+                     ButtonCell()]
     }
 }
 
@@ -126,12 +144,14 @@ extension RegistratioinViewModel {
                         for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
 
                 cell.textfieldNameLabel.text = textfieldButtonCell.subtitileText
-                cell.index = textfieldButtonCell.index
+                cell.id = textfieldButtonCell.id
 
                 if !(cell.isSubscribedFlag ) {
                     cell.isSubscribedFlag = true
-                    cell.cancellable =  cell.pressSubject.compactMap{$0} .sink { [weak self] index in
-                        self?.removeChildCells(index: index)
+                    cell.cancellable =  cell.pressSubject
+                        .compactMap{$0}
+                        .sink { [weak self] id in
+                            self?.removeChildCells(id: id)
                     }
                 }
 

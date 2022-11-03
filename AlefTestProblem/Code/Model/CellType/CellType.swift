@@ -5,31 +5,65 @@
 //  Created by Ruslan Abbasov on 03.11.2022.
 //
 
+import Foundation
 
-struct LabelCell: Hashable {
-    var labelText: String
+//class HashableCell: Hashable {
+//    var uuid = UUID()
+//    static func == (lhs: HashableCell, rhs: HashableCell) -> Bool {
+//        <#code#>
+//    }
+//
+//}
+
+protocol CellTypeProtocol: Hashable, Identifiable {
 }
 
-struct TextfieldCell: Hashable {
-    var subtitileText: String
+class CellType: CellTypeProtocol {
+    static func == (lhs: CellType, rhs: CellType) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    var id = UUID()
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
-struct LabelButtonCell: Hashable {
+class LabelCell: CellType {
+    var labelText: String = ""
+    init(labelText: String) {
+        self.labelText = labelText
+    }
 }
 
-struct TextfieldButtonCell: Hashable {
-    var subtitileText: String
-    var index: Int
+class TextfieldCell: CellType {
+    var subtitileText: String = ""
+    init(subtitileText: String) {
+        self.subtitileText = subtitileText
+    }
 }
 
-struct TextfieldHalfCell: Hashable {
-    var subtitileText: String
-    var index: Int
+class LabelButtonCell: CellType {
 }
 
-struct SeparatorCell: Hashable {
-    var index: Int
+class TextfieldButtonCell: CellType {
+    var subtitileText: String = ""
+
+    init(subtitileText: String) {
+        self.subtitileText = subtitileText
+    }
 }
 
-struct ButtonCell: Hashable {
+class TextfieldHalfCell: CellType {
+    var subtitileText: String = ""
+    init(subtitileText: String) {
+        self.subtitileText = subtitileText
+    }
+}
+
+class SeparatorCell: CellType {
+}
+
+class ButtonCell: CellType {
 }
