@@ -42,14 +42,6 @@ class RegistratioinViewModel {
     }
 
     private func removeChildCells(id: UUID) {
-//        cellsList.remove(at: cellsList.count - 2)
-//        cellsList.remove(at: cellsList.count - 2)
-//        cellsList.remove(at: cellsList.count - 2)
-
-//        cellsList.remove(at: index + 2)
-//        cellsList.remove(at: index + 1)
-//        cellsList.remove(at: index)
-//        cellsList[index].id
         for element in cellsList {
             if element.id == id {
                 guard let index = cellsList.firstIndex(of: element) else { return }
