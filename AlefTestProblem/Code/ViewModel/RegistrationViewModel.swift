@@ -93,7 +93,7 @@ class RegistratioinViewModel {
                      TextfieldCellPrototype(subtitileText: "Имя"),
                      TextfieldCellPrototype(subtitileText: "Возраст"),
                      LabelButtonCellPrototype(),
-                     ButtonCellRenamePrototype()]
+                     ButtonCellPrototype()]
     }
 }
 
@@ -112,9 +112,10 @@ extension RegistratioinViewModel {
                     withIdentifier: "TextFieldTableViewCell",
                     for: indexPath) as? TextFieldTableViewCell
                 cell?.subtitleLabel.text = textfieldCell.subtitileText
-                if self.childrenCellIndex <= 0 {
-                    self.clearaAllInformationSubject.sink { _ in
-                        cell?.clearTextFieldSubject.send()
+                if !(cell?.isSubscribedFlag ?? true ) {
+                    cell?.isSubscribedFlag = true
+                    self.clearaAllInformationSubject.sink { [weak cell] in
+                        cell?.clearTextfield()
                     }.store(in: &self.subscriptions)
                 }
                 return cell
@@ -147,12 +148,20 @@ extension RegistratioinViewModel {
                     self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
                     cell.cancellable =  cell.pressSubject
                         .compactMap{$0}
-                        .sink { [weak self] id in
+                        .sink { [weak self, weak cell] id in
                             self?.agePassthroughSubjectDictionary.removeValue(forKey: id)
-                            cell.clearTextField()
+                            cell?.clearTextField()
                             self?.removeChildCells(id: id)
                         }
+
+                    self.clearaAllInformationSubject.sink { [weak self] in
+                        self?.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
+                        cell.clearTextField()
+                        self?.removeChildCells(id: cell.getIDNumber() )
+                    }.store(in: &self.subscriptions)
                 }
+
+
 
                 return cell
             }  else if let textfieldHalfCell = item as? TextfieldHalfCellPrototype {
@@ -174,7 +183,7 @@ extension RegistratioinViewModel {
                     withIdentifier: "SeparatorTableViewCell",
                     for: indexPath) as? SeparatorTableViewCell
                 return cell
-            } else if item is ButtonCellRenamePrototype {
+            } else if item is ButtonCellPrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "ButtonTableViewCell",
                     for: indexPath) as? ButtonTableViewCell

@@ -58,5 +58,5 @@ class TextfieldHalfCellPrototype: CellTypePrototype {
 class SeparatorCellPrototype: CellTypePrototype {
 }
 
-class ButtonCellRenamePrototype: CellTypePrototype {
+class ButtonCellPrototype: CellTypePrototype {
 }

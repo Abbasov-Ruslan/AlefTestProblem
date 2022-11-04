@@ -12,6 +12,7 @@ class TextFieldButtonTableViewCell: UITableViewCell {
     public var pressSubject = PassthroughSubject<UUID?, Never>()
     public var isSubscribedFlag = false
     public var cancellable: AnyCancellable?
+    public var cancellable2: AnyCancellable?
 
     private var id: UUID?
 

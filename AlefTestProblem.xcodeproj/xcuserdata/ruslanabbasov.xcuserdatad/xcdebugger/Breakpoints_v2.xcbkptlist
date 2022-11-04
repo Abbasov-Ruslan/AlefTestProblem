@@ -23,8 +23,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EE0E4223-192D-434C-8A40-E11390273F2F"
-            shouldBeEnabled = "Yes"
+            uuid = "CA309386-1848-431E-8F35-DCA3083A2E48"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
@@ -39,15 +39,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CA309386-1848-431E-8F35-DCA3083A2E48"
-            shouldBeEnabled = "Yes"
+            uuid = "820FACEF-B3FC-4EB6-944F-C595130E2770"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "makeDataSource()"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,17 +55,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "820FACEF-B3FC-4EB6-944F-C595130E2770"
-            shouldBeEnabled = "Yes"
+            uuid = "3843AEA1-9006-4DC9-AA15-76442E32E4C1"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
             landmarkName = "makeDataSource()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3843AEA1-9006-4DC9-AA15-76442E32E4C1 - 6374f3948b7cc81b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UITableView, Foundation.IndexPath, Swift.AnyHashable) -&gt; Swift.Optional&lt;__C.UITableViewCell&gt; in AlefTestProblem.RegistratioinViewModel.(makeDataSource in _783F3C6B43BBA03DAC0703D9DF9CC1C8)() -&gt; AlefTestProblem.DiffableViewDataSource"
+                  moduleName = "AlefTestProblem"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanabbasov/Xcode%20projects/AlefTestProblem/AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "6681">
+               </Location>
+               <Location
+                  uuid = "3843AEA1-9006-4DC9-AA15-76442E32E4C1 - 6374f3948b7cc81b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UITableView, Foundation.IndexPath, Swift.AnyHashable) -&gt; Swift.Optional&lt;__C.UITableViewCell&gt; in AlefTestProblem.RegistratioinViewModel.(makeDataSource in _783F3C6B43BBA03DAC0703D9DF9CC1C8)() -&gt; AlefTestProblem.DiffableViewDataSource"
+                  moduleName = "AlefTestProblem"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanabbasov/Xcode%20projects/AlefTestProblem/AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "6817">
+               </Location>
+               <Location
+                  uuid = "3843AEA1-9006-4DC9-AA15-76442E32E4C1 - 2be45adc65291174"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #5 () -&gt; () in closure #1 (__C.UITableView, Foundation.IndexPath, Swift.AnyHashable) -&gt; Swift.Optional&lt;__C.UITableViewCell&gt; in AlefTestProblem.RegistratioinViewModel.(makeDataSource in _783F3C6B43BBA03DAC0703D9DF9CC1C8)() -&gt; AlefTestProblem.DiffableViewDataSource"
+                  moduleName = "AlefTestProblem"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ruslanabbasov/Xcode%20projects/AlefTestProblem/AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "157"
+                  endingLineNumber = "157"
+                  offsetFromSymbolStart = "145">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

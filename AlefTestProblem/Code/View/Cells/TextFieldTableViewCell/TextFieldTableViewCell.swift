@@ -9,8 +9,7 @@ import UIKit
 import Combine
 
 class TextFieldTableViewCell: UITableViewCell {
-
-    public var clearTextFieldSubject = PassthroughSubject<Void, Never>()
+    public var isSubscribedFlag = false
     private var subscriptions = Set<AnyCancellable>()
 
     @IBOutlet weak var textfield: UITextField!
@@ -22,10 +21,10 @@ class TextFieldTableViewCell: UITableViewCell {
         borderView.layer.borderWidth = 1
         borderView.layer.borderColor = UIColor.lightGray.cgColor
         borderView.layer.cornerRadius = borderView.frame.size.height / 10
-
-        clearTextFieldSubject.sink { [weak self] _ in
-            self?.textfield.text = ""
-        }.store(in: &subscriptions)
     }
-    
+
+    public func clearTextfield() {
+        textfield.text = ""
+    }
+
 }
