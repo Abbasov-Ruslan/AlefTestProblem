@@ -49,6 +49,7 @@ class TextfieldButtonCellPrototype: CellTypePrototype {
 
 class TextfieldHalfCellPrototype: CellTypePrototype {
     var subtitileText: String = ""
+    var linkedCellId: UUID?
     init(subtitileText: String) {
         self.subtitileText = subtitileText
     }

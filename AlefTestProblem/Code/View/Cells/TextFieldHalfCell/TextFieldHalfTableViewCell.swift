@@ -9,6 +9,8 @@ import UIKit
 
 class TextFieldHalfTableViewCell: UITableViewCell {
 
+    public var isSubscribedFlag = false
+
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var textfield: UITextField!
     @IBOutlet private weak var borderView: UIView!

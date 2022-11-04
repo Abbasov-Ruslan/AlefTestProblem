@@ -12,7 +12,8 @@ class RegistratioinViewModel {
 
     private lazy var dataSource: DiffableViewDataSource = makeDataSource()
     private var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
-    private var clearChildAgeSubject = PassthroughSubject<Void, Never>()
+    private var clearChildAgeSubject = PassthroughSubject<UUID?, Never>()
+    private var agePassthroughSubjectDictionary: [UUID: PassthroughSubject<UUID?, Never>] = [:]
     private var subscriptions = Set<AnyCancellable>()
     private var childrenCellIndex = 0
     private var firstSubscribeAddChildFlag = true
@@ -29,11 +30,14 @@ class RegistratioinViewModel {
     }
 
     private func addChildCells() {
-        cellsList.insert(TextfieldButtonCellPrototype(subtitileText: "Имя"),
-                                             at: cellsList.count - 1)
+        let textfieldButtonCellPrototype = TextfieldButtonCellPrototype(subtitileText: "Имя")
+        cellsList.insert(textfieldButtonCellPrototype,
+                         at: cellsList.count - 1)
 
-        cellsList.insert(TextfieldHalfCellPrototype(subtitileText: "Возраст"),
-                                           at: cellsList.count - 1)
+        let textfieldHalfCellPrototype = TextfieldHalfCellPrototype(subtitileText: "Возраст")
+        textfieldHalfCellPrototype.linkedCellId = textfieldButtonCellPrototype.id
+        cellsList.insert(textfieldHalfCellPrototype,
+                         at: cellsList.count - 1)
 
         cellsList.insert(SeparatorCellPrototype(),
                          at: cellsList.count - 1)
@@ -140,21 +144,30 @@ extension RegistratioinViewModel {
 
                 if !(cell.isSubscribedFlag ) {
                     cell.isSubscribedFlag = true
+                    self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
                     cell.cancellable =  cell.pressSubject
                         .compactMap{$0}
                         .sink { [weak self] id in
+                            self?.agePassthroughSubjectDictionary.removeValue(forKey: id)
                             cell.clearTextField()
-                            self?.clearChildAgeSubject.send()
-//                            self?.removeChildCells(id: id)
-                    }
+                            self?.removeChildCells(id: id)
+                        }
                 }
 
                 return cell
             }  else if let textfieldHalfCell = item as? TextfieldHalfCellPrototype {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "TextFieldHalfTableViewCell",
-                    for: indexPath) as? TextFieldHalfTableViewCell
-                cell?.changeSubtitleLabel(text: textfieldHalfCell.subtitileText)
+                guard let cell = tableView.dequeueReusableCell(
+                        withIdentifier: "TextFieldHalfTableViewCell",
+                        for: indexPath) as? TextFieldHalfTableViewCell else { return UITableViewCell() }
+                cell.changeSubtitleLabel(text: textfieldHalfCell.subtitileText)
+
+                if !(cell.isSubscribedFlag ) {
+                    cell.isSubscribedFlag = true
+                    self.agePassthroughSubjectDictionary[textfieldHalfCell.linkedCellId ?? UUID()]?.sink(receiveValue: { _ in
+                        cell.clearTextField()
+                    }).store(in: &self.subscriptions)
+                }
+
                 return cell
             } else if item is SeparatorCellPrototype {
                 let cell = tableView.dequeueReusableCell(

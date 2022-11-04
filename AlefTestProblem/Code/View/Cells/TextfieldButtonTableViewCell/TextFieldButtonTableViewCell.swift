@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class TextFieldButtonTableViewCell: UITableViewCell {
-    public let pressSubject = PassthroughSubject<UUID?, Never>()
+    public var pressSubject = PassthroughSubject<UUID?, Never>()
     public var isSubscribedFlag = false
     public var cancellable: AnyCancellable?
 
