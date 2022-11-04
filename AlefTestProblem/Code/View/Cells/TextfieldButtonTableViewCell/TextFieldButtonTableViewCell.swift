@@ -10,15 +10,14 @@ import Combine
 
 class TextFieldButtonTableViewCell: UITableViewCell {
     public let pressSubject = PassthroughSubject<UUID?, Never>()
-    var index: Int?
-    var id: UUID?
     public var isSubscribedFlag = false
-
     public var cancellable: AnyCancellable?
 
-    @IBOutlet weak var textfieldNameLabel: UILabel!
-    @IBOutlet weak var textfield: UITextField!
-    @IBOutlet weak var borderView: UIView!
+    private var id: UUID?
+
+    @IBOutlet private weak var textfieldNameLabel: UILabel!
+    @IBOutlet private weak var textfield: UITextField!
+    @IBOutlet private weak var borderView: UIView!
 
 
     @IBAction func buttonPress(_ sender: Any) {
@@ -30,6 +29,26 @@ class TextFieldButtonTableViewCell: UITableViewCell {
         borderView.layer.borderWidth = 1
         borderView.layer.borderColor = UIColor.lightGray.cgColor
         borderView.layer.cornerRadius = borderView.frame.size.height / 10
+    }
+
+    public func clearTextField() {
+        textfield.text = ""
+    }
+
+    public func changeTextfieldNameLabel(text: String) {
+        textfieldNameLabel.text = text
+    }
+
+    public func setID(id: UUID) {
+        self.id = id
+    }
+
+    public func getIDNumber() -> UUID {
+        guard let id = self.id else {
+            print("error: ID is Nil")
+            return UUID()
+        }
+        return id
     }
 
 }

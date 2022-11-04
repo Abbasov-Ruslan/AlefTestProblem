@@ -12,7 +12,7 @@ class RegistratioinViewModel {
 
     private lazy var dataSource: DiffableViewDataSource = makeDataSource()
     private var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
-    private var AddChildInformationSubject = PassthroughSubject<Void, Never>()
+    private var clearChildAgeSubject = PassthroughSubject<Void, Never>()
     private var subscriptions = Set<AnyCancellable>()
     private var childrenCellIndex = 0
     private var firstSubscribeAddChildFlag = true
@@ -130,20 +130,22 @@ extension RegistratioinViewModel {
                     }).store(in: &self.subscriptions)
                 }
                 return cell
-            } else if let textfieldButtonCell = item as? TextfieldButtonCellPrototype {
+            } else if let textfieldButtonCellPrototype = item as? TextfieldButtonCellPrototype {
                 guard let cell = tableView.dequeueReusableCell(
                         withIdentifier: "TextFieldButtonTableViewCell",
                         for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
 
-                cell.textfieldNameLabel.text = textfieldButtonCell.subtitileText
-                cell.id = textfieldButtonCell.id
+                cell.changeTextfieldNameLabel(text: textfieldButtonCellPrototype.subtitileText)
+                cell.setID(id: textfieldButtonCellPrototype.id)
 
                 if !(cell.isSubscribedFlag ) {
                     cell.isSubscribedFlag = true
                     cell.cancellable =  cell.pressSubject
                         .compactMap{$0}
                         .sink { [weak self] id in
-                            self?.removeChildCells(id: id)
+                            cell.clearTextField()
+                            self?.clearChildAgeSubject.send()
+//                            self?.removeChildCells(id: id)
                     }
                 }
 
@@ -152,7 +154,7 @@ extension RegistratioinViewModel {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldHalfTableViewCell",
                     for: indexPath) as? TextFieldHalfTableViewCell
-                cell?.subtitleLabel.text = textfieldHalfCell.subtitileText
+                cell?.changeSubtitleLabel(text: textfieldHalfCell.subtitileText)
                 return cell
             } else if item is SeparatorCellPrototype {
                 let cell = tableView.dequeueReusableCell(
