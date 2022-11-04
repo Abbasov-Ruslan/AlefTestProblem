@@ -11,7 +11,6 @@ import Combine
 class RegistratioinViewModel {
 
     private lazy var dataSource: DiffableViewDataSource = makeDataSource()
-    private var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
     private var clearChildAgeSubject = PassthroughSubject<UUID?, Never>()
     private var agePassthroughSubjectDictionary: [UUID: PassthroughSubject<UUID?, Never>] = [:]
     private var subscriptions = Set<AnyCancellable>()
@@ -19,6 +18,9 @@ class RegistratioinViewModel {
     private var firstSubscribeAddChildFlag = true
     private var firstSubscribeClearAllFlag = true
     private var cellsList: [CellTypePrototype] = []
+
+    public var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
+    public var checkAllInformationClearSubject = PassthroughSubject<Void, Never>()
 
     public var tableView: UITableView = RegisterTableView()
 
@@ -94,6 +96,10 @@ class RegistratioinViewModel {
                      TextfieldCellPrototype(subtitileText: "Возраст"),
                      LabelButtonCellPrototype(),
                      ButtonCellPrototype()]
+    }
+
+    public func clearAllInformation() {
+        clearaAllInformationSubject.send()
     }
 }
 
@@ -190,7 +196,7 @@ extension RegistratioinViewModel {
                 if self.firstSubscribeClearAllFlag {
                     self.firstSubscribeClearAllFlag = false
                     cell?.tapSubject.sink(receiveValue: { [weak self] _ in
-                        self?.clearaAllInformationSubject.send()
+                        self?.checkAllInformationClearSubject.send()
                     }).store(in: &self.subscriptions)
                 }
                 return cell

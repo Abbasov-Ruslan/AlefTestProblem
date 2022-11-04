@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class RegistrationViewController: UIViewController {
 
     private var viewModel = RegistratioinViewModel()
     private var tableView: UITableView?
+    private var subscriptions = Set<AnyCancellable>()
 
     required init?(coder: NSCoder) {
         self.tableView = viewModel.tableView
@@ -24,6 +26,10 @@ class RegistrationViewController: UIViewController {
         }
         view.addSubview(tableView)
 
+        viewModel.checkAllInformationClearSubject.sink { [weak self] in
+            self?.showAlert()
+        }.store(in: &subscriptions)
+
     }
 
 
@@ -34,4 +40,24 @@ class RegistrationViewController: UIViewController {
     }
 
 
+    private func showAlert() {
+//        let alert = UIAlertController(title: "Внимание", message: "Вы действительно хотите сбросить все данные?", preferredStyle: .alert)
+
+        let alert = UIAlertController(title: "Внимание",
+              message: "Вы действительно хотите сбросить все данные?",
+              preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Сбросить данные",
+                             style: .default) { (action) in
+            self.viewModel.clearAllInformation()
+        }
+        let cancelAction = UIAlertAction(title: "Отмена",
+                             style: .cancel) { (action) in
+        }
+        alert.addAction(defaultAction)
+        alert.addAction(cancelAction)
+
+
+
+        self.present(alert, animated: true, completion: nil)
+    }
 }
