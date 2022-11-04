@@ -18,14 +18,20 @@ class LabelButtonTableViewCell: UITableViewCell {
         pressSubject.send()
     }
 
-
-
     override func awakeFromNib() {
         super.awakeFromNib()
         addButton.layer.borderColor = UIColor.systemBlue.cgColor
 
         addButton.layer.borderWidth  = 2.0
         addButton.layer.cornerRadius =  addButton.frame.size.height / 2
+    }
+
+    public func hideButton() {
+        addButton.isHidden = true
+    }
+
+    public func showButton() {
+        addButton.isHidden = false
     }
     
 }

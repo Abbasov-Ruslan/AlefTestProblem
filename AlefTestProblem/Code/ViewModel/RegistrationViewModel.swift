@@ -12,6 +12,7 @@ class RegistratioinViewModel {
 
     private lazy var dataSource: DiffableViewDataSource = makeDataSource()
     private var clearChildAgeSubject = PassthroughSubject<UUID?, Never>()
+    private var childrenCountSubject = PassthroughSubject<Void, Never>()
     private var agePassthroughSubjectDictionary: [UUID: PassthroughSubject<UUID?, Never>] = [:]
     private var subscriptions = Set<AnyCancellable>()
     private var childrenCellIndex = 0
@@ -138,7 +139,14 @@ extension RegistratioinViewModel {
                         if childrenCellIndex < 5 {
                             self?.addChildCells()
                         }
+                        if childrenCellIndex >= 4 {
+                            cell?.hideButton()
+                        }
                     }).store(in: &self.subscriptions)
+
+                    self.childrenCountSubject.sink { [weak cell] in
+                        cell?.showButton()
+                    }.store(in: &self.subscriptions)
                 }
                 return cell
             } else if let textfieldButtonCellPrototype = item as? TextfieldButtonCellPrototype {
@@ -158,12 +166,16 @@ extension RegistratioinViewModel {
                             self?.agePassthroughSubjectDictionary.removeValue(forKey: id)
                             cell?.clearTextField()
                             self?.removeChildCells(id: id)
+                            if self?.childrenCellIndex ?? 0 < 5 {
+                                self?.childrenCountSubject.send()
+                            }
                         }
 
                     self.clearaAllInformationSubject.sink { [weak self] in
                         self?.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
                         cell.clearTextField()
-                        self?.removeChildCells(id: cell.getIDNumber() )
+                        self?.removeChildCells(id: cell.getIDNumber())
+                        self?.childrenCountSubject.send()
                     }.store(in: &self.subscriptions)
                 }
 
