@@ -17,7 +17,7 @@ class RegistratioinViewModel {
     private var childrenCellIndex = 0
     private var firstSubscribeAddChildFlag = true
     private var firstSubscribeClearAllFlag = true
-    private var cellsList: [CellType] = []
+    private var cellsList: [CellTypePrototype] = []
 
     public var tableView: UITableView = RegisterTableView()
 
@@ -29,13 +29,13 @@ class RegistratioinViewModel {
     }
 
     private func addChildCells() {
-        cellsList.insert(TextfieldButtonCell(subtitileText: "Имя"),
+        cellsList.insert(TextfieldButtonCellPrototype(subtitileText: "Имя"),
                                              at: cellsList.count - 1)
 
-        cellsList.insert(TextfieldHalfCell(subtitileText: "Возраст"),
+        cellsList.insert(TextfieldHalfCellPrototype(subtitileText: "Возраст"),
                                            at: cellsList.count - 1)
 
-        cellsList.insert(SeparatorCell(),
+        cellsList.insert(SeparatorCellPrototype(),
                          at: cellsList.count - 1)
         createSnapshot()
         increaseChildrenIndexNumber()
@@ -85,11 +85,11 @@ class RegistratioinViewModel {
     }
 
     private func createCellList(cellList: [AnyHashable]) {
-        cellsList = [LabelCell(labelText: "Персональные данные"),
-                     TextfieldCell(subtitileText: "Имя"),
-                     TextfieldCell(subtitileText: "Возраст"),
-                     LabelButtonCell(),
-                     ButtonCell()]
+        cellsList = [LabelCellPrototype(labelText: "Персональные данные"),
+                     TextfieldCellPrototype(subtitileText: "Имя"),
+                     TextfieldCellPrototype(subtitileText: "Возраст"),
+                     LabelButtonCellPrototype(),
+                     ButtonCellRenamePrototype()]
     }
 }
 
@@ -97,13 +97,13 @@ class RegistratioinViewModel {
 extension RegistratioinViewModel {
     private func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
-            if let labelCell = item as? LabelCell {
+            if let labelCell = item as? LabelCellPrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "LabelTableViewCell",
                     for: indexPath) as? LabelTableViewCell
                 cell?.label.text = labelCell.labelText
                 return cell
-            } else if let textfieldCell = item as? TextfieldCell {
+            } else if let textfieldCell = item as? TextfieldCellPrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldTableViewCell",
                     for: indexPath) as? TextFieldTableViewCell
@@ -114,7 +114,7 @@ extension RegistratioinViewModel {
                     }.store(in: &self.subscriptions)
                 }
                 return cell
-            } else if item is LabelButtonCell {
+            } else if item is LabelButtonCellPrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "LabelButtonTableViewCell",
                     for: indexPath) as? LabelButtonTableViewCell
@@ -130,7 +130,7 @@ extension RegistratioinViewModel {
                     }).store(in: &self.subscriptions)
                 }
                 return cell
-            } else if let textfieldButtonCell = item as? TextfieldButtonCell {
+            } else if let textfieldButtonCell = item as? TextfieldButtonCellPrototype {
                 guard let cell = tableView.dequeueReusableCell(
                         withIdentifier: "TextFieldButtonTableViewCell",
                         for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
@@ -148,18 +148,18 @@ extension RegistratioinViewModel {
                 }
 
                 return cell
-            }  else if let textfieldHalfCell = item as? TextfieldHalfCell {
+            }  else if let textfieldHalfCell = item as? TextfieldHalfCellPrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldHalfTableViewCell",
                     for: indexPath) as? TextFieldHalfTableViewCell
                 cell?.subtitleLabel.text = textfieldHalfCell.subtitileText
                 return cell
-            } else if item is SeparatorCell {
+            } else if item is SeparatorCellPrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "SeparatorTableViewCell",
                     for: indexPath) as? SeparatorTableViewCell
                 return cell
-            } else if item is ButtonCell {
+            } else if item is ButtonCellRenamePrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "ButtonTableViewCell",
                     for: indexPath) as? ButtonTableViewCell

@@ -7,19 +7,11 @@
 
 import Foundation
 
-//class HashableCell: Hashable {
-//    var uuid = UUID()
-//    static func == (lhs: HashableCell, rhs: HashableCell) -> Bool {
-//        <#code#>
-//    }
-//
-//}
-
 protocol CellTypeProtocol: Hashable, Identifiable {
 }
 
-class CellType: CellTypeProtocol {
-    static func == (lhs: CellType, rhs: CellType) -> Bool {
+class CellTypePrototype: CellTypeProtocol {
+    static func == (lhs: CellTypePrototype, rhs: CellTypePrototype) -> Bool {
         return lhs.id == rhs.id
     }
 
@@ -30,24 +22,24 @@ class CellType: CellTypeProtocol {
     }
 }
 
-class LabelCell: CellType {
+class LabelCellPrototype: CellTypePrototype {
     var labelText: String = ""
     init(labelText: String) {
         self.labelText = labelText
     }
 }
 
-class TextfieldCell: CellType {
+class TextfieldCellPrototype: CellTypePrototype {
     var subtitileText: String = ""
     init(subtitileText: String) {
         self.subtitileText = subtitileText
     }
 }
 
-class LabelButtonCell: CellType {
+class LabelButtonCellPrototype: CellTypePrototype {
 }
 
-class TextfieldButtonCell: CellType {
+class TextfieldButtonCellPrototype: CellTypePrototype {
     var subtitileText: String = ""
 
     init(subtitileText: String) {
@@ -55,15 +47,15 @@ class TextfieldButtonCell: CellType {
     }
 }
 
-class TextfieldHalfCell: CellType {
+class TextfieldHalfCellPrototype: CellTypePrototype {
     var subtitileText: String = ""
     init(subtitileText: String) {
         self.subtitileText = subtitileText
     }
 }
 
-class SeparatorCell: CellType {
+class SeparatorCellPrototype: CellTypePrototype {
 }
 
-class ButtonCell: CellType {
+class ButtonCellRenamePrototype: CellTypePrototype {
 }
