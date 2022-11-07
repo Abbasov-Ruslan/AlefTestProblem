@@ -103,19 +103,31 @@ class RegistratioinViewModel {
 }
 
 extension RegistratioinViewModel {
-    private func createCell(cellIdentifier: String, indexPath: IndexPath) -> UITableViewCell {
+    private func createCell(cellIdentifier: String, indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         return cell
+    }
+
+    private func getCellFor(prototype: CellIdentifierProtocol, indexPath: IndexPath, tableVeiw: UITableView) -> UITableViewCell {
+        switch prototype {
+        case is LabelCellPrototype:
+            let cell = createCell(cellIdentifier: prototype.cellIdentifieer, indexPath: indexPath, tableView: tableView)
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
 
     private func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { [weak self] tableView, indexPath, item in
             guard let self = self else { return UITableViewCell()}
+            guard let cellPrototype = item as? CellPrototype else {return UITableViewCell()}
+
             if item is LabelCellPrototype {
-                let cell = self.createCell(cellIdentifier: "LabelTableViewCell", indexPath: indexPath)
+                let cell = self.createCell(cellIdentifier: "LabelTableViewCell", indexPath: indexPath, tableView: tableView)
                 return cell
             } else if let textfieldCell = item as? TextfieldCellPrototype {
-                    let cell = self.createCell(cellIdentifier: "TextFieldTableViewCell", indexPath: indexPath) as? TextFieldTableViewCell
+                let cell = self.createCell(cellIdentifier: "TextFieldTableViewCell", indexPath: indexPath, tableView: tableView) as? TextFieldTableViewCell
                 cell?.changeSubtitleLabel(text: textfieldCell.subtitileText)
                 if !(cell?.isSubscribedFlag ?? true ) {
                     cell?.isSubscribedFlag = true
