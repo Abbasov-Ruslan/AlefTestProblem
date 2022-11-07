@@ -14,14 +14,14 @@ class TextFieldButtonTableViewCell: UITableViewCell {
     public var cancellable: AnyCancellable?
     public var cancellable2: AnyCancellable?
 
-    private var id: UUID?
+    private var cellId: UUID?
 
     @IBOutlet private weak var textfieldNameLabel: UILabel!
     @IBOutlet private weak var textfield: UITextField!
     @IBOutlet private weak var borderView: UIView!
 
     @IBAction private func buttonPress(_ sender: Any) {
-        self.pressSubject.send(id)
+        self.pressSubject.send(cellId)
     }
 
     override func awakeFromNib() {
@@ -39,16 +39,16 @@ class TextFieldButtonTableViewCell: UITableViewCell {
         textfieldNameLabel.text = text
     }
 
-    public func setID(id: UUID) {
-        self.id = id
+    public func setID(_ cellId: UUID) {
+        self.cellId = cellId
     }
 
     public func getIDNumber() -> UUID {
-        guard let id = self.id else {
+        guard let cellId = self.cellId else {
             print("error: ID is Nil")
             return UUID()
         }
-        return id
+        return cellId
     }
 
 }

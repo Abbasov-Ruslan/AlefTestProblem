@@ -38,7 +38,7 @@ class RegistratioinViewModel {
                          at: cellsList.count - 1)
 
         let textfieldHalfCellPrototype = TextfieldHalfCellPrototype(subtitileText: "Возраст")
-        textfieldHalfCellPrototype.linkedCellId = textfieldButtonCellPrototype.id
+        textfieldHalfCellPrototype.linkedCellId = textfieldButtonCellPrototype.prototypeId
         cellsList.insert(textfieldHalfCellPrototype,
                          at: cellsList.count - 1)
 
@@ -48,8 +48,8 @@ class RegistratioinViewModel {
         increaseChildrenIndexNumber()
     }
 
-    private func removeChildCells(id: UUID) {
-        for element in cellsList where element.id == id {
+    private func removeChildCells(childCellId: UUID) {
+        for element in cellsList where element.prototypeId == childCellId {
                 guard let index = cellsList.firstIndex(of: element) else { return }
                 cellsList.remove(at: index + 2)
                 cellsList.remove(at: index + 1)
@@ -152,17 +152,17 @@ extension RegistratioinViewModel {
                         for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
 
                 cell.changeTextfieldNameLabel(text: textfieldButtonCellPrototype.subtitileText)
-                cell.setID(id: textfieldButtonCellPrototype.id)
+                cell.setID(textfieldButtonCellPrototype.prototypeId)
 
                 if !(cell.isSubscribedFlag ) {
                     cell.isSubscribedFlag = true
                     self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
                     cell.cancellable =  cell.pressSubject
                         .compactMap {$0}
-                        .sink { [weak self, weak cell] id in
-                            self?.agePassthroughSubjectDictionary.removeValue(forKey: id)
+                        .sink { [weak self, weak cell] cellId in
+                            self?.agePassthroughSubjectDictionary.removeValue(forKey: cellId)
                             cell?.clearTextField()
-                            self?.removeChildCells(id: id)
+                            self?.removeChildCells(childCellId: cellId)
                             if self?.childrenCellIndex ?? 0 < 5 {
                                 self?.childrenCountSubject.send()
                             }
@@ -171,7 +171,7 @@ extension RegistratioinViewModel {
                     self.clearaAllInformationSubject.sink { [weak self] in
                         self?.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
                         cell.clearTextField()
-                        self?.removeChildCells(id: cell.getIDNumber())
+                        self?.removeChildCells(childCellId: cell.getIDNumber())
                         self?.childrenCountSubject.send()
                     }.store(in: &self.subscriptions)
                 }
@@ -185,7 +185,9 @@ extension RegistratioinViewModel {
 
                 if !(cell.isSubscribedFlag ) {
                     cell.isSubscribedFlag = true
-                    self.agePassthroughSubjectDictionary[textfieldHalfCell.linkedCellId ?? UUID()]?.sink(receiveValue: { _ in
+                    self.agePassthroughSubjectDictionary[
+                        textfieldHalfCell.linkedCellId ?? UUID()]?
+                        .sink(receiveValue: { _ in
                         cell.clearTextField()
                     }).store(in: &self.subscriptions)
                 }

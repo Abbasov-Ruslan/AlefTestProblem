@@ -15,7 +15,7 @@ class CellTypePrototype: CellTypeProtocol {
         return lhs.id == rhs.id
     }
 
-    var id = UUID()
+    var prototypeId = UUID()
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

@@ -33,5 +33,4 @@ class LabelButtonTableViewCell: UITableViewCell {
     public func showButton() {
         addButton.isHidden = false
     }
-    
 }

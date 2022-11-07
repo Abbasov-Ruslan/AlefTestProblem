@@ -14,7 +14,7 @@ class TextFieldHalfTableViewCell: UITableViewCell {
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var textfield: UITextField!
     @IBOutlet private weak var borderView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         borderView.layer.borderWidth = 1
@@ -29,5 +29,5 @@ class TextFieldHalfTableViewCell: UITableViewCell {
     public func changeSubtitleLabel(text: String) {
         subtitleLabel.text = text
     }
-    
+
 }

@@ -32,31 +32,25 @@ class RegistrationViewController: UIViewController {
 
     }
 
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView?.frame = view.bounds
         tableView?.separatorColor = UIColor.clear
     }
 
-
     private func showAlert() {
-//        let alert = UIAlertController(title: "Внимание", message: "Вы действительно хотите сбросить все данные?", preferredStyle: .alert)
-
         let alert = UIAlertController(title: "Внимание",
               message: "Вы действительно хотите сбросить все данные?",
               preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "Сбросить данные",
-                             style: .default) { (action) in
+                             style: .default) { _ in
             self.viewModel.clearAllInformation()
         }
         let cancelAction = UIAlertAction(title: "Отмена",
-                             style: .cancel) { (action) in
+                             style: .cancel) { _ in
         }
         alert.addAction(defaultAction)
         alert.addAction(cancelAction)
-
-
 
         self.present(alert, animated: true, completion: nil)
     }
