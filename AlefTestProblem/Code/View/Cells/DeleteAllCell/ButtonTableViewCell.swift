@@ -10,10 +10,11 @@ import Combine
 
 class ButtonTableViewCell: UITableViewCell {
 
-    let tapSubject = PassthroughSubject<Void, Never>()
+    public let tapSubject = PassthroughSubject<Void, Never>()
   
-    @IBOutlet weak var deleteAllButton: UIButton!
-    @IBAction func buttonTap(_ sender: Any) {
+    @IBOutlet private weak var deleteAllButton: UIButton!
+
+    @IBAction private func buttonTap(_ sender: Any) {
         tapAction()
     }
 

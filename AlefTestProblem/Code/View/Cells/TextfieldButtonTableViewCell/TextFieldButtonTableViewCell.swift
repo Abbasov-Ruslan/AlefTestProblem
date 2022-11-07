@@ -21,7 +21,7 @@ class TextFieldButtonTableViewCell: UITableViewCell {
     @IBOutlet private weak var borderView: UIView!
 
 
-    @IBAction func buttonPress(_ sender: Any) {
+    @IBAction private func buttonPress(_ sender: Any) {
         self.pressSubject.send(id)
     }
 

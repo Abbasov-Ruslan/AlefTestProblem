@@ -112,13 +112,13 @@ extension RegistratioinViewModel {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "LabelTableViewCell",
                     for: indexPath) as? LabelTableViewCell
-                cell?.label.text = labelCell.labelText
+                cell?.chageLabelText(text: labelCell.labelText)
                 return cell
             } else if let textfieldCell = item as? TextfieldCellPrototype {
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: "TextFieldTableViewCell",
                     for: indexPath) as? TextFieldTableViewCell
-                cell?.subtitleLabel.text = textfieldCell.subtitileText
+                cell?.changeSubtitleLabel(text: textfieldCell.subtitileText)
                 if !(cell?.isSubscribedFlag ?? true ) {
                     cell?.isSubscribedFlag = true
                     self.clearaAllInformationSubject.sink { [weak cell] in

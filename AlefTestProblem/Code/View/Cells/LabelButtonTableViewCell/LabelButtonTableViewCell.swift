@@ -10,7 +10,7 @@ import Combine
 
 class LabelButtonTableViewCell: UITableViewCell {
 
-    let pressSubject = PassthroughSubject<Void, Never>()
+    public let pressSubject = PassthroughSubject<Void, Never>()
 
     @IBOutlet private weak var addButton: UIButton!
 

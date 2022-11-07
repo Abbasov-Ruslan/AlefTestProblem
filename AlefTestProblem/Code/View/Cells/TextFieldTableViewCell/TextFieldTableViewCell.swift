@@ -12,15 +12,19 @@ class TextFieldTableViewCell: UITableViewCell {
     public var isSubscribedFlag = false
     private var subscriptions = Set<AnyCancellable>()
 
-    @IBOutlet weak var textfield: UITextField!
-    @IBOutlet weak var subtitleLabel: UILabel!
-    @IBOutlet weak var borderView: UIView!
+    @IBOutlet private weak var textfield: UITextField!
+    @IBOutlet private weak var subtitleLabel: UILabel!
+    @IBOutlet private weak var borderView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         borderView.layer.borderWidth = 1
         borderView.layer.borderColor = UIColor.lightGray.cgColor
         borderView.layer.cornerRadius = borderView.frame.size.height / 10
+    }
+
+    public func changeSubtitleLabel(text: String) {
+        subtitleLabel.text = text
     }
 
     public func clearTextfield() {
