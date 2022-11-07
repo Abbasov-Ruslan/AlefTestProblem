@@ -50,10 +50,10 @@ class RegistratioinViewModel {
 
     private func removeChildCells(childCellId: UUID) {
         for element in cellsList where element.prototypeId == childCellId {
-                guard let index = cellsList.firstIndex(of: element) else { return }
-                cellsList.remove(at: index + 2)
-                cellsList.remove(at: index + 1)
-                cellsList.remove(at: index)
+            guard let index = cellsList.firstIndex(of: element) else { return }
+            cellsList.remove(at: index + 2)
+            cellsList.remove(at: index + 1)
+            cellsList.remove(at: index)
         }
 
         createSnapshot()
@@ -108,20 +108,74 @@ extension RegistratioinViewModel {
         return cell
     }
 
-    private func getCellFor(prototype: CellIdentifierProtocol, indexPath: IndexPath, tableVeiw: UITableView) -> UITableViewCell {
-        switch prototype {
-        case is LabelCellPrototype:
-            let cell = createCell(cellIdentifier: prototype.cellIdentifieer, indexPath: indexPath, tableView: tableView)
-            return cell
+    private func getCellFor(prototype: AnyHashable,
+                            indexPath: IndexPath,
+                            tableVeiw: UITableView
+    ) -> UITableViewCell {
+        guard let cellPrototype = prototype as? CellPrototype else { fatalError("Unknown cell type") }
+        let cell = createCell(cellIdentifier: cellPrototype.cellIdentifieer, indexPath: indexPath, tableView: tableView)
+        return cell
+    }
+
+    private func setupCell(prototype: CellPrototype, cell: UITableViewCell) {
+        switch cell {
+        case is LabelTableViewCell:
+            break
+        case is TextFieldTableViewCell:
+            setupTextfieldCell(textfieldCellPrototype: prototype, cell: cell)
+        case is LabelButtonTableViewCell:
+            break
+        case is TextFieldHalfTableViewCell:
+            break
+        case is TextFieldButtonTableViewCell:
+            break
+        case is SeparatorTableViewCell:
+            break
+        case is ButtonTableViewCell:
+            break
         default:
-            return UITableViewCell()
+            break
+        }
+    }
+
+    private func setupTextfieldCell(textfieldCellPrototype: CellPrototype, cell: UITableViewCell) {
+        guard let cell = cell as? TextFieldTableViewCell,
+              let textfieldCellPrototype = textfieldCellPrototype as? TextfieldCellPrototype else {
+            return
+        }
+        cell.changeSubtitleLabel(text: textfieldCellPrototype.subtitileText)
+        if !(cell.isSubscribedFlag) {
+            cell.isSubscribedFlag = true
+            self.clearaAllInformationSubject.sink { [weak cell] in
+                cell?.clearTextfield()
+            }.store(in: &self.subscriptions)
+        }
+    }
+
+    private func setupLabelButtonCell(textfieldCellPrototype: CellPrototype, cell: UITableViewCell) {
+        guard let cell = cell as? LabelButtonTableViewCell else { return }
+        if self.firstSubscribeAddChildFlag {
+            self.firstSubscribeAddChildFlag = false
+            cell.pressSubject.sink(receiveValue: { [weak self] _ in
+                guard let childrenCellIndex = self?.childrenCellIndex else { return }
+
+                if childrenCellIndex < 5 {
+                    self?.addChildCells()
+                }
+                if childrenCellIndex >= 4 {
+                    cell.hideButton()
+                }
+            }).store(in: &self.subscriptions)
+
+            self.childrenCountSubject.sink { [weak cell] in
+                cell?.showButton()
+            }.store(in: &self.subscriptions)
         }
     }
 
     private func makeDataSource() -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { [weak self] tableView, indexPath, item in
             guard let self = self else { return UITableViewCell()}
-            guard let cellPrototype = item as? CellPrototype else {return UITableViewCell()}
 
             if item is LabelCellPrototype {
                 let cell = self.createCell(cellIdentifier: "LabelTableViewCell", indexPath: indexPath, tableView: tableView)
@@ -201,8 +255,8 @@ extension RegistratioinViewModel {
                     self.agePassthroughSubjectDictionary[
                         textfieldHalfCell.linkedCellId ?? UUID()]?
                         .sink(receiveValue: { _ in
-                        cell.clearTextField()
-                    }).store(in: &self.subscriptions)
+                            cell.clearTextField()
+                        }).store(in: &self.subscriptions)
                 }
 
                 self.clearaAllInformationSubject.sink { _ in
