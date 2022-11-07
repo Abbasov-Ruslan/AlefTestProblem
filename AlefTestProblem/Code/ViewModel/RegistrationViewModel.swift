@@ -49,13 +49,11 @@ class RegistratioinViewModel {
     }
 
     private func removeChildCells(id: UUID) {
-        for element in cellsList {
-            if element.id == id {
+        for element in cellsList where element.id == id {
                 guard let index = cellsList.firstIndex(of: element) else { return }
                 cellsList.remove(at: index + 2)
                 cellsList.remove(at: index + 1)
                 cellsList.remove(at: index)
-            }
         }
 
         createSnapshot()
@@ -64,9 +62,9 @@ class RegistratioinViewModel {
 
     private func createSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-        snapshot.appendSections([.Main])
-        snapshot.appendItems(cellsList,toSection:.Main)
-        dataSource.apply(snapshot, animatingDifferences:false)
+        snapshot.appendSections([.main])
+        snapshot.appendItems(cellsList, toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 
     private func increaseChildrenIndexNumber() {
@@ -103,7 +101,6 @@ class RegistratioinViewModel {
         clearaAllInformationSubject.send()
     }
 }
-
 
 extension RegistratioinViewModel {
     private func makeDataSource() -> DiffableViewDataSource {
@@ -161,7 +158,7 @@ extension RegistratioinViewModel {
                     cell.isSubscribedFlag = true
                     self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
                     cell.cancellable =  cell.pressSubject
-                        .compactMap{$0}
+                        .compactMap {$0}
                         .sink { [weak self, weak cell] id in
                             self?.agePassthroughSubjectDictionary.removeValue(forKey: id)
                             cell?.clearTextField()
@@ -179,10 +176,8 @@ extension RegistratioinViewModel {
                     }.store(in: &self.subscriptions)
                 }
 
-
-
                 return cell
-            }  else if let textfieldHalfCell = item as? TextfieldHalfCellPrototype {
+            } else if let textfieldHalfCell = item as? TextfieldHalfCellPrototype {
                 guard let cell = tableView.dequeueReusableCell(
                         withIdentifier: "TextFieldHalfTableViewCell",
                         for: indexPath) as? TextFieldHalfTableViewCell else { return UITableViewCell() }

@@ -20,7 +20,6 @@ class TextFieldButtonTableViewCell: UITableViewCell {
     @IBOutlet private weak var textfield: UITextField!
     @IBOutlet private weak var borderView: UIView!
 
-
     @IBAction private func buttonPress(_ sender: Any) {
         self.pressSubject.send(id)
     }
