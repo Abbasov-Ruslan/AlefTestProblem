@@ -103,6 +103,13 @@ class RegistratioinViewModel {
 }
 
 extension RegistratioinViewModel {
+    private func makeDataSource() -> DiffableViewDataSource {
+        return DiffableViewDataSource(tableView: tableView) { [weak self] tableView, indexPath, item in
+            let cell = self?.getCellFor(prototype: item, indexPath: indexPath, tableVeiw: tableView)
+            return cell
+        }
+    }
+
     private func createCell(cellIdentifier: String, indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         return cell
@@ -112,38 +119,47 @@ extension RegistratioinViewModel {
                             indexPath: IndexPath,
                             tableVeiw: UITableView
     ) -> UITableViewCell {
-        guard let cellPrototype = prototype as? CellPrototype else { fatalError("Unknown cell type") }
-        let cell = createCell(cellIdentifier: cellPrototype.cellIdentifieer, indexPath: indexPath, tableView: tableView)
+        guard let prototype = prototype as? CellPrototype else { fatalError("Unknown cell type") }
+        let cell = createCell(cellIdentifier: prototype.cellIdentifieer, indexPath: indexPath, tableView: tableView)
+        setupCell(prototype: prototype, cell: cell)
         return cell
     }
 
     private func setupCell(prototype: CellPrototype, cell: UITableViewCell) {
         switch cell {
         case is LabelTableViewCell:
-            break
+            setupLabelCell(prototype: prototype, cell: cell)
         case is TextFieldTableViewCell:
-            setupTextfieldCell(textfieldCellPrototype: prototype, cell: cell)
+            setupTextfieldCell(prototype: prototype, cell: cell)
         case is LabelButtonTableViewCell:
-            break
-        case is TextFieldHalfTableViewCell:
-            break
+            setupLabelButtonCell(cell: cell)
         case is TextFieldButtonTableViewCell:
-            break
+            setupTextFieldButtonCell(prototype: prototype, cell: cell)
+        case is TextFieldHalfTableViewCell:
+            setupTextFieldHalfCell(prototype: prototype, cell: cell)
         case is SeparatorTableViewCell:
             break
         case is ButtonTableViewCell:
-            break
+            setupButtonCellPrototype(prototype: prototype, cell: cell)
         default:
             break
         }
     }
 
-    private func setupTextfieldCell(textfieldCellPrototype: CellPrototype, cell: UITableViewCell) {
-        guard let cell = cell as? TextFieldTableViewCell,
-              let textfieldCellPrototype = textfieldCellPrototype as? TextfieldCellPrototype else {
+    private func setupLabelCell(prototype: CellPrototype, cell: UITableViewCell) {
+        guard let cell = cell as? LabelTableViewCell,
+              let prototype = prototype as? LabelCellPrototype else {
             return
         }
-        cell.changeSubtitleLabel(text: textfieldCellPrototype.subtitileText)
+        cell.chageLabelText(text: prototype.labelText)
+    }
+
+    private func setupTextfieldCell(prototype: CellPrototype, cell: UITableViewCell) {
+        guard let cell = cell as? TextFieldTableViewCell,
+              let prototype = prototype as? TextfieldCellPrototype else {
+            return
+        }
+        cell.changeSubtitleLabel(text: prototype.subtitileText)
         if !(cell.isSubscribedFlag) {
             cell.isSubscribedFlag = true
             self.clearaAllInformationSubject.sink { [weak cell] in
@@ -152,7 +168,7 @@ extension RegistratioinViewModel {
         }
     }
 
-    private func setupLabelButtonCell(textfieldCellPrototype: CellPrototype, cell: UITableViewCell) {
+    private func setupLabelButtonCell(cell: UITableViewCell) {
         guard let cell = cell as? LabelButtonTableViewCell else { return }
         if self.firstSubscribeAddChildFlag {
             self.firstSubscribeAddChildFlag = false
@@ -173,116 +189,71 @@ extension RegistratioinViewModel {
         }
     }
 
-    private func makeDataSource() -> DiffableViewDataSource {
-        return DiffableViewDataSource(tableView: tableView) { [weak self] tableView, indexPath, item in
-            guard let self = self else { return UITableViewCell()}
+    private func setupTextFieldButtonCell(prototype: CellPrototype, cell: UITableViewCell) {
+        guard let cell = cell as? TextFieldButtonTableViewCell,
+              let prototype = prototype as? TextfieldButtonCellPrototype else {
+         return
+        }
 
-            if item is LabelCellPrototype {
-                let cell = self.createCell(cellIdentifier: "LabelTableViewCell", indexPath: indexPath, tableView: tableView)
-                return cell
-            } else if let textfieldCell = item as? TextfieldCellPrototype {
-                let cell = self.createCell(cellIdentifier: "TextFieldTableViewCell", indexPath: indexPath, tableView: tableView) as? TextFieldTableViewCell
-                cell?.changeSubtitleLabel(text: textfieldCell.subtitileText)
-                if !(cell?.isSubscribedFlag ?? true ) {
-                    cell?.isSubscribedFlag = true
-                    self.clearaAllInformationSubject.sink { [weak cell] in
-                        cell?.clearTextfield()
-                    }.store(in: &self.subscriptions)
-                }
-                return cell
-            } else if item is LabelButtonCellPrototype {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "LabelButtonTableViewCell",
-                    for: indexPath) as? LabelButtonTableViewCell
-                if self.firstSubscribeAddChildFlag {
-                    self.firstSubscribeAddChildFlag = false
-                    cell?.pressSubject.sink(receiveValue: { [weak self] _ in
-                        guard let childrenCellIndex = self?.childrenCellIndex else {
-                            return
-                        }
-                        if childrenCellIndex < 5 {
-                            self?.addChildCells()
-                        }
-                        if childrenCellIndex >= 4 {
-                            cell?.hideButton()
-                        }
-                    }).store(in: &self.subscriptions)
+        cell.changeTextfieldNameLabel(text: prototype.subtitileText)
+        cell.setID(prototype.prototypeId)
 
-                    self.childrenCountSubject.sink { [weak cell] in
-                        cell?.showButton()
-                    }.store(in: &self.subscriptions)
-                }
-                return cell
-            } else if let textfieldButtonCellPrototype = item as? TextfieldButtonCellPrototype {
-                guard let cell = tableView.dequeueReusableCell(
-                        withIdentifier: "TextFieldButtonTableViewCell",
-                        for: indexPath) as? TextFieldButtonTableViewCell else { return UITableViewCell()}
-
-                cell.changeTextfieldNameLabel(text: textfieldButtonCellPrototype.subtitileText)
-                cell.setID(textfieldButtonCellPrototype.prototypeId)
-
-                if !(cell.isSubscribedFlag ) {
-                    cell.isSubscribedFlag = true
-                    self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
-                    cell.cancellable =  cell.pressSubject
-                        .compactMap {$0}
-                        .sink { [weak self, weak cell] cellId in
-                            self?.agePassthroughSubjectDictionary.removeValue(forKey: cellId)
-                            cell?.clearTextField()
-                            self?.removeChildCells(childCellId: cellId)
-                            if self?.childrenCellIndex ?? 0 < 5 {
-                                self?.childrenCountSubject.send()
-                            }
-                        }
-
-                    self.clearaAllInformationSubject.sink { [weak self] in
-                        self?.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
-                        cell.clearTextField()
-                        self?.removeChildCells(childCellId: cell.getIDNumber())
-                        self?.childrenCountSubject.send()
-                    }.store(in: &self.subscriptions)
-                }
-
-                return cell
-            } else if let textfieldHalfCell = item as? TextfieldHalfCellPrototype {
-                guard let cell = tableView.dequeueReusableCell(
-                        withIdentifier: "TextFieldHalfTableViewCell",
-                        for: indexPath) as? TextFieldHalfTableViewCell else { return UITableViewCell() }
-                cell.changeSubtitleLabel(text: textfieldHalfCell.subtitileText)
-
-                if !(cell.isSubscribedFlag ) {
-                    cell.isSubscribedFlag = true
-                    self.agePassthroughSubjectDictionary[
-                        textfieldHalfCell.linkedCellId ?? UUID()]?
-                        .sink(receiveValue: { _ in
-                            cell.clearTextField()
-                        }).store(in: &self.subscriptions)
-                }
-
-                self.clearaAllInformationSubject.sink { _ in
+        if !(cell.isSubscribedFlag ) {
+            cell.isSubscribedFlag = true
+            self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
+            cell.cancellable =  cell.pressSubject
+                .compactMap {$0}
+                .sink { [weak self, weak cell] cellId in
+                    guard let self = self, let cell = cell else { return }
+                    self.agePassthroughSubjectDictionary.removeValue(forKey: cellId)
                     cell.clearTextField()
-                }.store(in: &self.subscriptions)
-
-                return cell
-            } else if item is SeparatorCellPrototype {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "SeparatorTableViewCell",
-                    for: indexPath) as? SeparatorTableViewCell
-                return cell
-            } else if item is ButtonCellPrototype {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "ButtonTableViewCell",
-                    for: indexPath) as? ButtonTableViewCell
-                if self.firstSubscribeClearAllFlag {
-                    self.firstSubscribeClearAllFlag = false
-                    cell?.tapSubject.sink(receiveValue: { [weak self] _ in
-                        self?.checkAllInformationClearSubject.send()
-                    }).store(in: &self.subscriptions)
+                    self.removeChildCells(childCellId: cellId)
+                    if self.childrenCellIndex < 5 {
+                        self.childrenCountSubject.send()
+                    }
                 }
-                return cell
-            } else {
-                fatalError("Unknown cell type")
-            }
+
+            self.clearaAllInformationSubject.sink { [weak self, weak cell] in
+                guard let self = self, let cell = cell else { return }
+                self.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
+                cell.clearTextField()
+                self.removeChildCells(childCellId: cell.getIDNumber())
+                self.childrenCountSubject.send()
+            }.store(in: &self.subscriptions)
         }
     }
+
+    private func setupTextFieldHalfCell(prototype: CellPrototype, cell: UITableViewCell) {
+        guard let cell = cell as? TextFieldHalfTableViewCell,
+              let prototype = prototype as? TextfieldHalfCellPrototype else {
+         return
+        }
+        cell.changeSubtitleLabel(text: prototype.subtitileText)
+
+        if !(cell.isSubscribedFlag ) {
+            cell.isSubscribedFlag = true
+            self.agePassthroughSubjectDictionary[
+                prototype.linkedCellId ?? UUID()]?
+                .sink(receiveValue: { _ in
+                    cell.clearTextField()
+                }).store(in: &self.subscriptions)
+        }
+
+        self.clearaAllInformationSubject.sink { _ in
+            cell.clearTextField()
+        }.store(in: &self.subscriptions)
+    }
+
+    private func setupButtonCellPrototype(prototype: CellPrototype, cell: UITableViewCell) {
+        guard let cell = cell as? ButtonTableViewCell else {
+         return
+        }
+        if self.firstSubscribeClearAllFlag {
+            self.firstSubscribeClearAllFlag = false
+            cell.tapSubject.sink(receiveValue: { [weak self] _ in
+                self?.checkAllInformationClearSubject.send()
+            }).store(in: &self.subscriptions)
+        }
+    }
+
 }
