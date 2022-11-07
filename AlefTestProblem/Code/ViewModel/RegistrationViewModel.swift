@@ -18,7 +18,7 @@ class RegistratioinViewModel {
     private var childrenCellIndex = 0
     private var firstSubscribeAddChildFlag = true
     private var firstSubscribeClearAllFlag = true
-    private var cellsList: [CellTypePrototype] = []
+    private var cellsList: [CellPrototype] = []
 
     public var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
     public var checkAllInformationClearSubject = PassthroughSubject<Void, Never>()
@@ -103,18 +103,19 @@ class RegistratioinViewModel {
 }
 
 extension RegistratioinViewModel {
+    private func createCell(cellIdentifier: String, indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        return cell
+    }
+
     private func makeDataSource() -> DiffableViewDataSource {
-        return DiffableViewDataSource(tableView: tableView) { tableView, indexPath, item in
-            if let labelCell = item as? LabelCellPrototype {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "LabelTableViewCell",
-                    for: indexPath) as? LabelTableViewCell
-                cell?.chageLabelText(text: labelCell.labelText)
+        return DiffableViewDataSource(tableView: tableView) { [weak self] tableView, indexPath, item in
+            guard let self = self else { return UITableViewCell()}
+            if item is LabelCellPrototype {
+                let cell = self.createCell(cellIdentifier: "LabelTableViewCell", indexPath: indexPath)
                 return cell
             } else if let textfieldCell = item as? TextfieldCellPrototype {
-                let cell = tableView.dequeueReusableCell(
-                    withIdentifier: "TextFieldTableViewCell",
-                    for: indexPath) as? TextFieldTableViewCell
+                    let cell = self.createCell(cellIdentifier: "TextFieldTableViewCell", indexPath: indexPath) as? TextFieldTableViewCell
                 cell?.changeSubtitleLabel(text: textfieldCell.subtitileText)
                 if !(cell?.isSubscribedFlag ?? true ) {
                     cell?.isSubscribedFlag = true

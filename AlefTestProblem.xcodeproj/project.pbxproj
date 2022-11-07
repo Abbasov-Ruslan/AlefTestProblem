@@ -10,7 +10,7 @@
 		533268D3290ADC2D00BDDA52 /* DiffableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533268D2290ADC2D00BDDA52 /* DiffableViewDataSource.swift */; };
 		533268D4290ADC2D00BDDA52 /* DiffableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533268D2290ADC2D00BDDA52 /* DiffableViewDataSource.swift */; };
 		533268D5290ADC2D00BDDA52 /* DiffableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533268D2290ADC2D00BDDA52 /* DiffableViewDataSource.swift */; };
-		5343D1652913CD2700CEE362 /* CellTypePrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5343D1642913CD2700CEE362 /* CellTypePrototype.swift */; };
+		5343D1652913CD2700CEE362 /* CellPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5343D1642913CD2700CEE362 /* CellPrototype.swift */; };
 		5343D16C2913CE9400CEE362 /* RegistrationViewModel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5343D16B2913CE9400CEE362 /* RegistrationViewModel + Extension.swift */; };
 		5347EEB62907E155007A8AA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEB52907E155007A8AA1 /* AppDelegate.swift */; };
 		5347EEB82907E155007A8AA1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347EEB72907E155007A8AA1 /* SceneDelegate.swift */; };
@@ -93,7 +93,7 @@
 
 /* Begin PBXFileReference section */
 		533268D2290ADC2D00BDDA52 /* DiffableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableViewDataSource.swift; sourceTree = "<group>"; };
-		5343D1642913CD2700CEE362 /* CellTypePrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTypePrototype.swift; sourceTree = "<group>"; };
+		5343D1642913CD2700CEE362 /* CellPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPrototype.swift; sourceTree = "<group>"; };
 		5343D16B2913CE9400CEE362 /* RegistrationViewModel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RegistrationViewModel + Extension.swift"; sourceTree = "<group>"; };
 		5347EEB22907E155007A8AA1 /* AlefTestProblem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlefTestProblem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5347EEB52907E155007A8AA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 		5343D1632913CD1C00CEE362 /* CellType */ = {
 			isa = PBXGroup;
 			children = (
-				5343D1642913CD2700CEE362 /* CellTypePrototype.swift */,
+				5343D1642913CD2700CEE362 /* CellPrototype.swift */,
 			);
 			path = CellType;
 			sourceTree = "<group>";
@@ -548,7 +548,7 @@
 			files = (
 				53F2F990290FF75F009F1122 /* ButtonTableViewCell.swift in Sources */,
 				5343D16C2913CE9400CEE362 /* RegistrationViewModel + Extension.swift in Sources */,
-				5343D1652913CD2700CEE362 /* CellTypePrototype.swift in Sources */,
+				5343D1652913CD2700CEE362 /* CellPrototype.swift in Sources */,
 				534BC1B1290949B200F22B43 /* RegisterTableView.swift in Sources */,
 				5347EEBA2907E155007A8AA1 /* RegistrationViewController.swift in Sources */,
 				5370E117290FDEFF00AADBF5 /* TextFieldButtonTableViewCell.swift in Sources */,
