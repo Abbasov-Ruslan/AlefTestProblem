@@ -119,7 +119,9 @@ extension RegistratioinViewModel {
                             indexPath: IndexPath,
                             tableVeiw: UITableView
     ) -> UITableViewCell {
-        guard let prototype = prototype as? CellPrototype else { fatalError("Unknown cell type") }
+        guard let prototype = prototype as? CellPrototype else {
+            fatalError("Unknown cell type")
+        }
         let cell = createCell(cellIdentifier: prototype.cellIdentifieer, indexPath: indexPath, tableView: tableView)
         setupCell(prototype: prototype, cell: cell)
         return cell
