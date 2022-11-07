@@ -195,6 +195,10 @@ extension RegistratioinViewModel {
                     }).store(in: &self.subscriptions)
                 }
 
+                self.clearaAllInformationSubject.sink { _ in
+                    cell.clearTextField()
+                }.store(in: &self.subscriptions)
+
                 return cell
             } else if item is SeparatorCellPrototype {
                 let cell = tableView.dequeueReusableCell(
