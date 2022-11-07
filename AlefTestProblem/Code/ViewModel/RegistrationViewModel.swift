@@ -8,16 +8,17 @@
 import UIKit
 import Combine
 
-class RegistratioinViewModel {
+public class RegistratioinViewModel {
 
-    private lazy var dataSource: DiffableViewDataSource = makeDataSource()
     private var clearChildAgeSubject = PassthroughSubject<UUID?, Never>()
     private var childrenCountSubject = PassthroughSubject<Void, Never>()
     private var agePassthroughSubjectDictionary: [UUID: PassthroughSubject<UUID?, Never>] = [:]
     private var subscriptions = Set<AnyCancellable>()
-    private var childrenCellIndex = 0
     private var firstSubscribeAddChildFlag = true
     private var firstSubscribeClearAllFlag = true
+
+    private lazy var dataSource: DiffableViewDataSource = makeDataSource(viewModel: self)
+    private var childrenCellIndex = 0
     private var cellsList: [CellPrototype] = []
 
     public var clearaAllInformationSubject = PassthroughSubject<Void, Never>()
@@ -30,6 +31,39 @@ class RegistratioinViewModel {
         registerAllCells()
         tableView.dataSource = dataSource
         createSnapshot()
+    }
+
+    public func clearAllInformation() {
+        clearaAllInformationSubject.send()
+    }
+}
+
+extension RegistratioinViewModel {
+    private func createSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(cellsList, toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+extension RegistratioinViewModel {
+    private func increaseChildrenIndexNumber() {
+        childrenCellIndex += 1
+    }
+
+    private func decreaseChildrenIndexNumber() {
+        childrenCellIndex -= 1
+    }
+}
+
+extension RegistratioinViewModel {
+    private func createCellList(cellList: [AnyHashable]) {
+        cellsList = [LabelCellPrototype(labelText: "Персональные данные"),
+                     TextfieldCellPrototype(subtitileText: "Имя"),
+                     TextfieldCellPrototype(subtitileText: "Возраст"),
+                     LabelButtonCellPrototype(),
+                     ButtonCellPrototype()]
     }
 
     private func addChildCells() {
@@ -59,22 +93,9 @@ class RegistratioinViewModel {
         createSnapshot()
         decreaseChildrenIndexNumber()
     }
+}
 
-    private func createSnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(cellsList, toSection: .main)
-        dataSource.apply(snapshot, animatingDifferences: false)
-    }
-
-    private func increaseChildrenIndexNumber() {
-        childrenCellIndex += 1
-    }
-
-    private func decreaseChildrenIndexNumber() {
-        childrenCellIndex -= 1
-    }
-
+extension RegistratioinViewModel {
     private func registerAllCells() {
         registerCell(nibName: "LabelTableViewCell", reuseIdentifier: "LabelTableViewCell")
         registerCell(nibName: "LabelButtonTableViewCell", reuseIdentifier: "LabelButtonTableViewCell")
@@ -88,22 +109,10 @@ class RegistratioinViewModel {
     private func registerCell(nibName: String, reuseIdentifier: String) {
         tableView.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
     }
-
-    private func createCellList(cellList: [AnyHashable]) {
-        cellsList = [LabelCellPrototype(labelText: "Персональные данные"),
-                     TextfieldCellPrototype(subtitileText: "Имя"),
-                     TextfieldCellPrototype(subtitileText: "Возраст"),
-                     LabelButtonCellPrototype(),
-                     ButtonCellPrototype()]
-    }
-
-    public func clearAllInformation() {
-        clearaAllInformationSubject.send()
-    }
 }
 
 extension RegistratioinViewModel {
-    private func makeDataSource() -> DiffableViewDataSource {
+    private func makeDataSource(viewModel: RegistratioinViewModel) -> DiffableViewDataSource {
         return DiffableViewDataSource(tableView: tableView) { [weak self] tableView, indexPath, item in
             let cell = self?.getCellFor(prototype: item, indexPath: indexPath, tableVeiw: tableView)
             return cell
