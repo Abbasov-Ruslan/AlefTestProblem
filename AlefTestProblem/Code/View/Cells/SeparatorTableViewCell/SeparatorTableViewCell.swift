@@ -8,8 +8,4 @@
 import UIKit
 
 class SeparatorTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }

@@ -11,10 +11,6 @@ class LabelTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var label: UILabel!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
     public func chageLabelText(text: String) {
         label.text = text
     }
