@@ -203,13 +203,13 @@ extension RegistratioinViewModel {
     private func setupTextFieldButtonCell(prototype: CellPrototype, cell: UITableViewCell) {
         guard let cell = cell as? TextFieldButtonTableViewCell,
               let prototype = prototype as? TextfieldButtonCellPrototype else {
-         return
+            return
         }
 
         cell.changeTextfieldNameLabel(text: prototype.subtitileText)
         cell.setID(prototype.prototypeId)
 
-        if !(cell.isSubscribedFlag ) {
+        if !cell.isSubscribedFlag {
             cell.isSubscribedFlag = true
             self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
             cell.cancellable =  cell.pressSubject
@@ -223,21 +223,28 @@ extension RegistratioinViewModel {
                         self.childrenCountSubject.send()
                     }
                 }
+        }
+
+        if !cell.isSubscribedToClearAll {
+            cell.isSubscribedToClearAll = true
 
             self.clearaAllInformationSubject.sink { [weak self, weak cell] in
-                guard let self = self, let cell = cell else { return }
+                guard let self = self, let cell = cell else {
+                    return
+                }
                 self.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
                 cell.clearTextField()
                 self.removeChildCells(childCellId: cell.getIDNumber())
                 self.childrenCountSubject.send()
             }.store(in: &self.subscriptions)
         }
+
     }
 
     private func setupTextFieldHalfCell(prototype: CellPrototype, cell: UITableViewCell) {
         guard let cell = cell as? TextFieldHalfTableViewCell,
               let prototype = prototype as? TextfieldHalfCellPrototype else {
-         return
+            return
         }
         cell.changeSubtitleLabel(text: prototype.subtitileText)
 
@@ -257,7 +264,7 @@ extension RegistratioinViewModel {
 
     private func setupButtonCellPrototype(prototype: CellPrototype, cell: UITableViewCell) {
         guard let cell = cell as? ButtonTableViewCell else {
-         return
+            return
         }
         if self.firstSubscribeClearAllFlag {
             self.firstSubscribeClearAllFlag = false
