@@ -43,7 +43,7 @@ extension RegistratioinViewModel {
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.main])
         snapshot.appendItems(cellsList, toSection: .main)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot, animatingDifferences: tableView.window != nil)
     }
 }
 
