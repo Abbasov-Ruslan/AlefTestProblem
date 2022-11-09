@@ -232,9 +232,9 @@ extension RegistratioinViewModel {
                 guard let self = self, let cell = cell else {
                     return
                 }
-                self.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
                 cell.clearTextField()
                 self.removeChildCells(childCellId: cell.getIDNumber())
+                self.agePassthroughSubjectDictionary.removeValue(forKey: cell.getIDNumber() )
                 self.childrenCountSubject.send()
             }.store(in: &self.subscriptions)
         }

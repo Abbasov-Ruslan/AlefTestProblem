@@ -7,32 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FC809834-E81E-4E80-9091-641EF60B3493"
+            uuid = "971899F5-7A05-4690-9950-12A1B631AC7A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
-            landmarkName = "setupTextFieldHalfCell(prototype:cell:)"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "setupTextFieldButtonCell(prototype:cell:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E84F4C3A-513F-4027-A57F-61DA12287E41"
+            uuid = "A453AEF5-3275-4E58-AB8C-D7469E4F50CB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
-            landmarkName = "setupTextFieldButtonCell(prototype:cell:)"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "makeDataSource(viewModel:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
