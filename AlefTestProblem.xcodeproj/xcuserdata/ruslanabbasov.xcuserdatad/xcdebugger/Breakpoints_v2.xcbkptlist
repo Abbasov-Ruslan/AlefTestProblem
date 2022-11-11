@@ -7,32 +7,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "971899F5-7A05-4690-9950-12A1B631AC7A"
-            shouldBeEnabled = "Yes"
+            uuid = "5553A7B1-5FCD-4C44-8724-D7D81835CCFB"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
+            filePath = "AlefTestProblem/Code/View/Cells/TextFieldTableViewCell/TextFieldTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "setupTextFieldButtonCell(prototype:cell:)"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "changeSubtitleLabel(text:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A453AEF5-3275-4E58-AB8C-D7469E4F50CB"
+            uuid = "599FD06F-4ECB-405E-BB80-5910C7875C84"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlefTestProblem/Code/View/Cells/TextFieldTableViewCell/TextFieldTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "clearTextfield()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "41082350-0AB4-46C1-AC26-0D01707347C2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlefTestProblem/Code/View/Cells/TextFieldTableViewCell/TextFieldTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "TextFieldTableViewCell"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "16BECCA0-D85B-4346-9BA3-82CCDF726470"
+            shouldBeEnabled = "Yes"
+            condition = "prototype?.text != &quot;&quot;"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AlefTestProblem/Code/View/Cells/TextFieldHalfCell/TextFieldHalfTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "prepareForReuse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4D9A7A3A-CC90-413A-9558-0C20A932B625"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlefTestProblem/Code/ViewModel/RegistrationViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "makeDataSource(viewModel:)"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "setupTextFieldButtonCell(prototype:cell:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -208,14 +208,19 @@ extension RegistratioinViewModel {
 
         cell.changeTextfieldNameLabel(text: prototype.subtitileText)
         cell.setID(prototype.prototypeId)
+        cell.prototype = prototype
+        cell.changeTextfield(text: prototype.text)
 
         if !cell.isSubscribedFlag {
             cell.isSubscribedFlag = true
             self.agePassthroughSubjectDictionary[cell.getIDNumber()] = cell.pressSubject
             cell.cancellable =  cell.pressSubject
-                .compactMap {$0}
                 .sink { [weak self, weak cell] cellId in
-                    guard let self = self, let cell = cell else { return }
+                    guard let self = self,
+                          let cell = cell,
+                          let cellId = cellId else {
+                        return
+                    }
                     self.agePassthroughSubjectDictionary.removeValue(forKey: cellId)
                     cell.clearTextField()
                     self.removeChildCells(childCellId: cellId)
@@ -247,6 +252,8 @@ extension RegistratioinViewModel {
             return
         }
         cell.changeSubtitleLabel(text: prototype.subtitileText)
+        cell.prototype = prototype
+        cell.changeTextfield(text: prototype.text)
 
         if !(cell.isSubscribedFlag ) {
             cell.isSubscribedFlag = true

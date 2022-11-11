@@ -10,6 +10,7 @@ import UIKit
 class TextFieldHalfTableViewCell: UITableViewCell {
 
     public var isSubscribedFlag = false
+    public var prototype: TextfieldHalfCellPrototype?
 
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var textfield: UITextField!
@@ -22,8 +23,19 @@ class TextFieldHalfTableViewCell: UITableViewCell {
         borderView.layer.cornerRadius = borderView.frame.size.height / 10
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+//        textfield.text = prototype?.text
+        prototype?.text = textfield.text ?? ""
+    }
+
     public func clearTextField() {
         textfield.text = ""
+    }
+
+    public func changeTextfield(text: String) {
+        textfield.text = text
     }
 
     public func changeSubtitleLabel(text: String) {

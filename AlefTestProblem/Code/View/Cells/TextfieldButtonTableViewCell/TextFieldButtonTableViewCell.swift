@@ -14,6 +14,7 @@ class TextFieldButtonTableViewCell: UITableViewCell {
     public var isSubscribedToClearAll = false
     public var cancellable: AnyCancellable?
     public var cancellable2: AnyCancellable?
+    public var prototype: TextfieldButtonCellPrototype?
 
     private var cellId: UUID?
 
@@ -32,8 +33,17 @@ class TextFieldButtonTableViewCell: UITableViewCell {
         borderView.layer.cornerRadius = borderView.frame.size.height / 10
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        prototype?.text = textfield.text ?? ""
+    }
+
     public func clearTextField() {
         textfield.text = ""
+    }
+
+    public func changeTextfield(text: String) {
+        textfield.text = text
     }
 
     public func changeTextfieldNameLabel(text: String) {

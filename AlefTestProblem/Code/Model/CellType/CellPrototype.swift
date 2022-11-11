@@ -57,6 +57,7 @@ class LabelButtonCellPrototype: CellPrototype {
 
 class TextfieldButtonCellPrototype: CellPrototype {
     public var subtitileText: String = ""
+    public var text: String = ""
 
     init(subtitileText: String) {
         super.init()
@@ -67,6 +68,7 @@ class TextfieldButtonCellPrototype: CellPrototype {
 
 class TextfieldHalfCellPrototype: CellPrototype {
     public var subtitileText: String = ""
+    public var text: String = ""
     public var linkedCellId: UUID?
 
     init(subtitileText: String) {
